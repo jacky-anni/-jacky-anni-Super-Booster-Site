@@ -19,9 +19,9 @@ const UserItemList = ({ user }) => {
               to={`/profile/${user.login}`}
               className='text-dark text-hover-primary mb-1 font-weight-bolder font-size-lg'
             >
-              {user.login}
+              {user.prenom} {user.nom}
             </Link>
-            <span className='text-muted font-weight-bold'>{user.type}</span>
+            <span className='text-muted font-weight-bold'>{user.email}</span>
           </div>
           {/*end::Text*/}
           {/*begin::Section*/}

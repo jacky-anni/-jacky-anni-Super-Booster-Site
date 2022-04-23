@@ -1,9 +1,15 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { authCheck } from "./../ultils/authCheck";
 
-const Home = ({ title }) => {
+const Home = () => {
+  useEffect(async () => {
+    const log = await authCheck();
+    console.log(log);
+  });
+
   return (
     <>
-      <h1>Bonjour a tous</h1>
+      <h1>Bonjour a tous </h1>
     </>
   );
 };

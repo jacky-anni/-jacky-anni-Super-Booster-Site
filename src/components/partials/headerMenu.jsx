@@ -1,6 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import { getUser } from "./../../actions/userActions";
 
-const HeaderMenu = () => {
+const HeaderMenu = ({ user: { user, isAuthentificated }, getUser }) => {
+  useEffect(async () => {
+    await getUser();
+  },[]);
+
   return (
     <>
       {/*begin::Header Menu*/}
@@ -17,7 +23,7 @@ const HeaderMenu = () => {
             aria-haspopup='true'
           >
             <a href='javascript:;' className='menu-link menu-toggle'>
-              <span className='menu-text'>Pages</span>
+              <span className='menu-text'>Pages </span>
               <i className='menu-arrow' />
             </a>
             <div className='menu-submenu menu-submenu-classic menu-submenu-left'>
@@ -314,4 +320,8 @@ const HeaderMenu = () => {
   );
 };
 
-export default HeaderMenu;
+const mapStateToPros = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToPros, {getUser})(HeaderMenu);

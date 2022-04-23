@@ -1,5 +1,5 @@
-import { React, Fragment } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { React, Fragment, useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/home/index";
 import Menu from "./components/partials/menu";
 import Users from "./components/users/users";
@@ -11,22 +11,46 @@ import Footer from "./components/partials/footer";
 import Courses from "./components/pages/courses/courses";
 import UserHome from "./components/users/index";
 import Profile from "./components/users/profile";
+import Login from "./components/login/login";
+import setAuthToken from "./components/ultils/setAuthToken";
+import NotFount from "./components/layout/notFound";
 
 function App() {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  if (
+    window.location.pathname === "/login" ||
+    window.location.pathname === "/register"
+  ) {
+    var layoutView = false;
+  } else {
+    var layoutView = true;
+  }
+
   return (
     <Provider store={store}>
-      <Fragment>
-        <Layout>
+      <>
+        {layoutView == false ? (
           <Switch>
-            {/* <Route path="/home" element={<Home title ={'Home'} />} /> */}
-            <Route path='/users' component={UserHome} title={"Utilisateur"} />
-            <Route exact path='/home' component={Home} />
-            <Route exact path='/courses' component={Courses} />
-            <Route exact path='/courses' component={Courses} />
-            <Route exact path='/profile/:username' component={Profile} />
+            <Route exact path='/login' component={Login} />
           </Switch>
-        </Layout>
-      </Fragment>
+        ) : (
+          <Layout>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/users' component={UserHome} />
+              <Route exact path='/courses' component={Courses} />
+              <Route exact path='/profile/:username' component={Profile} />
+              {/* <Route exactpath='*' component={NotFount} /> */}
+              <Route path='/not-found' component={NotFount} />
+
+              <Redirect to='/not-found' />
+            </Switch>
+          </Layout>
+        )}
+      </>
     </Provider>
   );
 }

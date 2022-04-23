@@ -80,7 +80,7 @@ const QuickAction = ({ user }) => {
                           href='#'
                           className='text-dark font-weight-bold text-hover-primary font-size-h5 mb-0'
                         >
-                          {user.name}
+                          {user.prenom} {user.nom}
                         </a>
                         <span className='text-muted font-weight-bold'>
                           Head of Development
