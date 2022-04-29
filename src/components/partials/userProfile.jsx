@@ -35,7 +35,7 @@ const UserProfileBar = ({
               id='kt_quick_user_toggle'
             >
               <span className='text-muted font-weight-bold font-size-base d-none d-md-inline mr-1'>
-                Hi {user.prenom}
+                Hi sss
               </span>
               <span className='text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3'></span>
               <span className='symbol symbol-35 symbol-light-success'>

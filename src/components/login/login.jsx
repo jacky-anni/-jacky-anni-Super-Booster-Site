@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { login } from "./../../actions/userActions";
 import ShowErrors from "./../layout/showErrors";
 import { useHistory, Redirect } from "react-router-dom";
+
 const Login = ({ user: { isAuthentificated, errors }, login }) => {
   const loginForm = Yup.object().shape({
     email: Yup.string()
@@ -13,13 +14,11 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
     password: Yup.string().required("Ce champ est obligatoire !")
   });
 
-  const history = useHistory();
+  const link = "/";
 
   useEffect(() => {
     if (isAuthentificated) {
-      // window.location.href = "/";
-      // return history.push("/");
-      return <Redirect to='/not-found' />;
+      window.location.replace("/");
     }
   });
 
@@ -33,11 +32,11 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
           <div className='col-md-12 d-flex align-items-center'>
             {/*begin::Signin*/}
             <div className='login-form login-signin'>
+              {errors ? <ShowErrors errors={errors} type={"danger"} /> : null}
               {/*begin::Form*/}
 
+              {console.log(errors)}
               <div className=''>
-                {/*begin::Title*/}
-                <ShowErrors errors={errors} type={"danger"} />
                 <Formik
                   initialValues={{
                     email: "",

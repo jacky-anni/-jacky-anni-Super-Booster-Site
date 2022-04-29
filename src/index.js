@@ -13,13 +13,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ConfigProvider locale={frFR}>
-        <ToastContainer />
-
+    <ConfigProvider locale={frFR}>
+      <ToastContainer />
+      <BrowserRouter>
         <App />
-      </ConfigProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

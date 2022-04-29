@@ -7,26 +7,24 @@ import { authCheck } from "./../components/ultils/authCheck";
 import cookie from "react-cookies";
 
 const PrivateRoute = ({ path, component: Component, render, ...rest }) => {
-  useEffect(async () => {
-    let auth = await authCheck();
-    cookie.save("user", auth);
-  });
+  // useEffect(async () => {
+  //   let auth = await authCheck();
+  //   // cookie.save("user", auth);
+  // });
 
-  const auth_ = cookie.load("user");
-
-  console.log(auth_);
-
-  if (auth_ === false) {
-    return (window.location.href = "/login");
-    // return <Redirect to='/login' />;
+  const auth = authCheck();
+  if (auth === false) {
+    return <Redirect to='/login' />;
   } else {
-    return auth_;
-    // <Route
-    //   {...rest}
-    //   render={props => {
-    //     return Component ? <Component {...props} /> : render(props);
-    //   }}
-    // />
+    return (
+      <Route
+        exact
+        {...rest}
+        render={props => {
+          return Component ? <Component {...props} /> : render(props);
+        }}
+      />
+    );
   }
 };
 

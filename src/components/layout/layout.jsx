@@ -7,7 +7,6 @@ import UserProfileBar from "./../partials/userProfile";
 import Notifications from "./../partials/notification";
 import Footer from "./../partials/footer";
 import ToolBar from "./../partials/toolsBar";
-import PageTitle from "./../partials/pageTile";
 
 const Layout = ({ children }) => {
   return (
@@ -55,10 +54,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-        <div className='container'>
-          <PageTitle />
-          {children}
-        </div>
+        <div className='container'>{children}</div>
         <Footer />
         {/*end::Footer*/}
       </div>

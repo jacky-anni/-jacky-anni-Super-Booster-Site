@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { getUsers } from "./../../actions/userActions";
 import PropTypes from "prop-types";
 import SearchUsers from "./searchUsers";
+import { authCheck } from "./../ultils/authCheck";
 
 const Users = ({
   user: { users, loading, filtered },
@@ -16,6 +17,7 @@ const Users = ({
   searchUsers
 }) => {
   const [users_, setUsers_] = useState(users);
+  authCheck();
   useEffect(async () => {
     try {
       getUsers();
@@ -68,10 +70,7 @@ const Users = ({
   );
 };
 
-// Users.PropTypes = {
-//   user: PropTypes.object.isRequired
-// };
-
+Users.propTypes = { user: PropTypes.object.isRequired };
 const mapStateToProps = state => ({
   user: state.user
 });

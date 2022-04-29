@@ -2,14 +2,10 @@ import React, { Fragment, useEffect } from "react";
 import { authCheck } from "./../ultils/authCheck";
 
 const Home = () => {
-  useEffect(async () => {
-    const log = await authCheck();
-    console.log(log);
-  });
-
+  const ok = authCheck();
   return (
     <>
-      <h1>Bonjour a tous </h1>
+      <h1>Bonjour a tous {process.env.API_URL} </h1>
     </>
   );
 };

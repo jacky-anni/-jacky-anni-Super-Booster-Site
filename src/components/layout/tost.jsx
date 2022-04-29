@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 export function ToastMessage(message, type) {
   const theme = "colored";
-  const autoClose = 1000;
+  const autoClose = 3000;
   const position = toast.POSITION.BOTTOM_RIGHT;
   const icon = true;
 
@@ -45,12 +45,12 @@ export function ToastMessage(message, type) {
       break;
 
     default:
-    toast(message, {
-      position: position,
-      icon: icon,
-      theme: 'dark',
-      autoClose: autoClose
-    });
+      toast(message, {
+        position: position,
+        icon: icon,
+        theme: "dark",
+        autoClose: autoClose
+      });
       break;
   }
 }

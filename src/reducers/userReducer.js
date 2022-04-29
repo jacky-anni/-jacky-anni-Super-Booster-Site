@@ -7,14 +7,18 @@ import {
   FAIL_LOGIN,
   LOAD_USER,
   ERROR_USER,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  ADD_USER,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR
 } from "./../actions/types";
+import cookie from "react-cookies";
 const initialState = {
   users: [],
   user: null,
+  user_: null,
   loading: true,
-  error: null,
-  errors: [],
+  errors: null,
   filtered: null,
   isAuthentificated: false
 };
@@ -79,6 +83,20 @@ export default (state = initialState, action) => {
         ...state,
         isAuthentificated: false,
         loading: false
+      };
+
+    case ADD_USER_SUCCESS:
+      cookie.save("add_user", true);
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+        user_: action.payload
+      };
+
+    case ADD_USER_ERROR:
+      return {
+        ...state,
+        errors: action.payload
       };
 
     default:

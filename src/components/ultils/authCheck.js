@@ -2,20 +2,10 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import setAuthToken from "./setAuthToken";
 import cookie from "react-cookies";
+import { Redirect } from "react-router-dom";
 
-export const authCheck = async () => {
-  // const user1 = { userId: cookie.load("userId") };
-
-  // const expires = new Date();
-  // expires.setDate(Date.now());
-  // cookie.save("userId", "1234", {
-  //   path: "/",
-  //   expires,
-  //   maxAge: 100
-  // });
-  // // console.log(user1);
-  // console.log(cookie.load("userId"));
-
+export const authCheck = () => {
+  const link_redirect = "/login";
   if (localStorage.token) {
     let token = localStorage.getItem("token");
     let decodedToken = jwt_decode(token);
@@ -24,24 +14,23 @@ export const authCheck = async () => {
     // JWT exp is in seconds
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       // return 0;
-      return (window.location.href = "/login");
+      return <Redirect to='/login' />;
       // return false;
     } else {
       try {
-        const res = await axios.get("/api/admin/user");
-        const data = await res.data;
-        if (data.id_ === decodedToken.user.id) {
-          return true;
-        } else {
-          return (window.location.href = "/login");
-        }
+        axios.get("/api/admin/user").then(function(user) {
+          if (user.data.id_ === decodedToken.user.id) {
+            return true;
+          } else {
+            return <Redirect to='/login' />;
+          }
+        });
       } catch (error) {
-        return (window.location.href = "/login");
-        // return false;
+        window.location.replace(link_redirect);
       }
     }
   } else {
-    // return (window.location.href = "/login");
+    window.location.replace(link_redirect);
     return false;
   }
 };

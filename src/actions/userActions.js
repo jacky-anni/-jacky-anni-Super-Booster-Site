@@ -8,11 +8,18 @@ import {
   FAIL_LOGIN,
   LOAD_USER,
   ERROR_USER,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  ADD_USER,
+  ADD_USER_SUCCESS,
+  ADD_USER_ERROR,
+  GET_PROFILE,
+  GET_PROFILE_ERROR
 } from "./types";
 import axios from "axios";
 import { headers } from "./../components/ultils/hearders";
 import setAuthToken from "./../components/ultils/setAuthToken";
+import { errors } from "./../components/ultils/errors";
+import { ToastMessage } from "./../components/layout/tost";
 
 export const getUsers = () => async dispatch => {
   const res = await axios.get("/api/admin/users");
@@ -47,15 +54,10 @@ export const login = user => async dispatch => {
       payload: res.data
     });
   } catch (error) {
-    if (error.response.status == 406) {
-      var errors = error.response.data.errors;
-    } else {
-      var errors = error.response.data.msg;
-    }
-
+    const err = errors(error);
     dispatch({
       type: FAIL_LOGIN,
-      payload: errors
+      payload: err
     });
   }
 };
@@ -73,8 +75,9 @@ export const getUser = async => async dispatch => {
       payload: res.data
     });
   } catch (error) {
+    const err = errors(error);
     dispatch({
-      type: ERROR_USER
+      type: ADD_USER_ERROR
     });
   }
 };
@@ -83,6 +86,28 @@ export const logout = () => async dispatch => {
   dispatch({
     type: LOGOUT_SUCCESS
   });
+};
+
+// Add user
+export const addUser = user => async dispatch => {
+  try {
+    const res = await axios.post("/api/admin/user/create", user, headers);
+    if (res.status === 200) {
+      dispatch({
+        type: ADD_USER_SUCCESS,
+        payload: res.data
+      });
+      ToastMessage("Utilisateur enregistré avec succès", "success");
+    } else {
+      ToastMessage("Un problème s'est rencontré, reessayer", "success");
+    }
+  } catch (error) {
+    const err = errors(error);
+    dispatch({
+      type: ADD_USER_ERROR,
+      payload: err
+    });
+  }
 };
 
 // export const addLogs = log => async dispatch => {};

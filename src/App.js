@@ -1,7 +1,6 @@
 import { React, Fragment, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/home/index";
-import Menu from "./components/partials/menu";
 import Users from "./components/users/users";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -37,18 +36,20 @@ function App() {
             <Route exact path='/login' component={Login} />
           </Switch>
         ) : (
-          <Layout>
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/users' component={UserHome} />
+          <Switch>
+            <Layout>
+              <Route
+                exact
+                path='/users'
+                component={UserHome}
+                title={"Utilisaeurs"}
+              />
               <Route exact path='/courses' component={Courses} />
               <Route exact path='/profile/:username' component={Profile} />
-              {/* <Route exactpath='*' component={NotFount} /> */}
-              <Route path='/not-found' component={NotFount} />
-
-              <Redirect to='/not-found' />
-            </Switch>
-          </Layout>
+              <Route exact path='/' component={Home} />
+              {/* <Route exact path='*' component={NotFount} /> */}
+            </Layout>
+          </Switch>
         )}
       </>
     </Provider>

@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 const QuickAction = ({ user }) => {
   return (
     <>
@@ -68,7 +69,7 @@ const QuickAction = ({ user }) => {
                       <div className='d-flex flex-shrink-0 mr-5'>
                         <div className='symbol symbol-circle symbol-lg-45'>
                           <img
-                            src='./assets/media/users/150-6.jpg'
+                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTo8ot81o5G-DZLv5GatY5S5Jsc2rHobmXkQ&usqp=CAU'
                             alt='image'
                           />
                         </div>
@@ -220,13 +221,11 @@ const QuickAction = ({ user }) => {
 
             <li className='navi-separator mt-3 opacity-70' />
             <li className='navi-footer py-4'>
-              <a
-                className='btn btn-primary font-weight-bold btn-sm px-5'
-                href='#'
-              >
-                <i className='ki ki-plus icon-sm' />
-                Create
-              </a>
+              <Link to=''>
+                <button className='btn btn-primary'>
+                  <i className='fa fa-edit'></i>
+                </button>
+              </Link>
             </li>
           </ul>
           {/*end::Navigation*/}
