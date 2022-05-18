@@ -5,7 +5,7 @@ import cookie from "react-cookies";
 import { Redirect } from "react-router-dom";
 
 export const authCheck = () => {
-  const link_redirect = "/login";
+  const link_redirect = "/";
   if (localStorage.token) {
     let token = localStorage.getItem("token");
     let decodedToken = jwt_decode(token);
@@ -14,7 +14,7 @@ export const authCheck = () => {
     // JWT exp is in seconds
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       // return 0;
-      return <Redirect to='/login' />;
+      return <Redirect to='/' />;
       // return false;
     } else {
       try {
@@ -22,7 +22,7 @@ export const authCheck = () => {
           if (user.data.id_ === decodedToken.user.id) {
             return true;
           } else {
-            return <Redirect to='/login' />;
+            return <Redirect to='/' />;
           }
         });
       } catch (error) {

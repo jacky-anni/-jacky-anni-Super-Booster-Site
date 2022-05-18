@@ -9,6 +9,10 @@ export const errors = errors => {
       return errors.response.data.msg;
       break;
 
+    case 401:
+      return errors.response.data.msg;
+      break;
+
     default:
       break;
   }

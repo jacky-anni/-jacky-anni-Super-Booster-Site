@@ -2,32 +2,56 @@ import { Fragment, useEffect } from "react";
 import Banner from "./profile/banner";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { authCheck } from "./../ultils/authCheck";
-import { getProfile } from "./../../actions/profileActions.";
+import { getProfile, getInfoProfile } from "./../../actions/profileActions.";
 import { useParams } from "react-router-dom";
 import PageTitle from "./../partials/pageTile";
 import Head from "./../partials/head";
+import MenuLeftBar from "./profile/menuLeftBar";
+import ProfileInformation from "./profile/profileInformation";
+import InformationUser from "./profile/informationUser";
+import NotAccess from "./../layout/notAccess";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
-const Profile = ({ profile: { loading, profile }, getProfile }) => {
+const Profile = ({
+  profile: { errors, loading, profile, photo, profileInfo },
+  getProfile,
+  getImageProfile
+}) => {
   const { username } = useParams();
-  authCheck();
+  const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
+
   useEffect(() => {
     getProfile(username);
   }, []);
+
   return (
     <>
-      <Head />
       <PageTitle title='Profile' />
-      <div className='row'>
-        <div className='col-md-12'>
-          {!loading ? <Banner profile={profile} /> : null}
+      {!loading ? (
+        <div className='row'>
+          {!errors ? (
+            <>
+              <Banner />
+              <MenuLeftBar />
+              <InformationUser user={profile} />
+            </>
+          ) : (
+            <NotAccess error={errors} />
+          )}
         </div>
-      </div>
+      ) : (
+        <center>
+          <Spin indicator={antIcon} />
+        </center>
+      )}
     </>
   );
 };
 
-Profile.propTypes = { profile: PropTypes.object.isRequired };
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired
+};
 const mapStateToProps = state => ({
   profile: state.profile
 });

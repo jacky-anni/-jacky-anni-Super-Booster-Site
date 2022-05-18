@@ -7,12 +7,12 @@ import UserProfileBar from "./../partials/userProfile";
 import Notifications from "./../partials/notification";
 import Footer from "./../partials/footer";
 import ToolBar from "./../partials/toolsBar";
+import Loader from "./loader";
 
 const Layout = ({ children }) => {
   return (
     <>
       <HeaderMobile />
-
       {/*begin::Aside*/}
       <div
         className='aside aside-left aside-fixed d-flex flex-column flex-row-auto'
@@ -25,6 +25,7 @@ const Layout = ({ children }) => {
         <LeftMenu />
         {/*end::Aside Menu*/}
       </div>
+
       {/*end::Aside*/}
       {/*begin::Wrapper*/}
 
@@ -48,11 +49,14 @@ const Layout = ({ children }) => {
             <div className='topbar'>
               <Notifications />
               <UserProfileBar />
+
               {/*end::User*/}
             </div>
             {/*end::Topbar*/}
           </div>
         </div>
+
+        {/* <Loader /> */}
 
         <div className='container'>{children}</div>
         <Footer />

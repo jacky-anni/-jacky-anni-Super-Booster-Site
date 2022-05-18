@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { getUsers } from "./../../actions/userActions";
 import PropTypes from "prop-types";
 import SearchUsers from "./searchUsers";
-import { authCheck } from "./../ultils/authCheck";
 
 const Users = ({
   user: { users, loading, filtered },
@@ -17,11 +16,10 @@ const Users = ({
   searchUsers
 }) => {
   const [users_, setUsers_] = useState(users);
-  authCheck();
+
   useEffect(async () => {
     try {
       getUsers();
-
       if (filtered !== null) {
         setUsers_({ filtered });
       }
@@ -43,7 +41,7 @@ const Users = ({
   ];
 
   return (
-    <React.Fragment>
+    <>
       <SearchUsers />
       {loading == true ? (
         <span style={{ padding: 50 }}>
@@ -66,7 +64,7 @@ const Users = ({
       {/* {
         <Skeleton />
       } */}
-    </React.Fragment>
+    </>
   );
 };
 

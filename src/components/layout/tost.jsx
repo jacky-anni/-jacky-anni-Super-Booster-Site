@@ -40,7 +40,8 @@ export function ToastMessage(message, type) {
         position: position,
         icon: icon,
         theme: theme,
-        autoClose: autoClose
+        autoClose: false,
+        progress: false
       });
       break;
 

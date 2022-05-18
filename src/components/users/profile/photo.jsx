@@ -4,22 +4,26 @@ import ImgCrop from "antd-img-crop";
 import { UploadOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { changePhoto, getImage } from "./../../../actions/profileActions.";
+import { changePhoto } from "./../../../actions/profileActions.";
 import { useParams } from "react-router-dom";
 import { Spin } from "antd";
 
 const Photo = ({ profile: { loading, photo }, changePhoto, getImage }) => {
-  const { username } = useParams();
-  const [fileList, setFileList] = useState({});
+  const { username } = useParams(); // useEffect(async () => {}, []);
 
-  useEffect(async () => {
-    getImage("1.png");
-  }, []);
-
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-    changePhoto(newFileList);
+  const onChange = info => {
+    // setFileList(newFileList);
+    if (info.file.status == "done") {
+      changePhoto(info.file.response, true);
+    } else {
+      changePhoto(info.file.response, false);
+    }
   };
+
+  // const data = async file => {
+  //   changePhoto(fileList);
+  //   // console.log(file);
+  // };
 
   // const onPreview = async file => {
   //   let src = file.url;
@@ -40,20 +44,13 @@ const Photo = ({ profile: { loading, photo }, changePhoto, getImage }) => {
     <ImgCrop rotate>
       <Upload
         action='/api/admin/change-photo'
-        // listType='picture-card'
-        // fileList={fileList}
         name={"photo"}
         onChange={onChange}
+        accept='image/*'
+        onPreview={false}
+        onRemove={true}
       >
-        {loading ? (
-          <Spin />
-        ) : (
-          <img src={`http://localhost:6000/${photo}`} alt='' />
-        )}
-        ssssss
-        <Button icon={<UploadOutlined />}>Changer</Button>
-        {console.log(photo)}
-        {/* {fileList.length < 1 && "+ Upload"} */}
+        <Button icon={<UploadOutlined />}>Changer.....</Button>
       </Upload>
     </ImgCrop>
   );
@@ -65,5 +62,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { changePhoto, getImage }
+  { changePhoto }
 )(Photo);

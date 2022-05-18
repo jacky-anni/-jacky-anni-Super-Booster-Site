@@ -1,11 +1,20 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Users from "./users";
 import { connect } from "react-redux";
 import PageTitle from "./../partials/pageTile";
 import Head from "./../partials/head";
 import CreateUser from "./create";
+import { Modal, Button } from "antd";
+import { Link, useLocation } from "react-router-dom";
 
 const UserHome = () => {
+  const [link, setLink] = useState();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+  });
+
   return (
     <>
       <Head />
@@ -21,7 +30,14 @@ const UserHome = () => {
             </h3>
           </div>
           <div className='card-toolbar'>
-            <CreateUser />
+            <Link to='/dashboard/users/create'>
+              <Button type='primary'>
+                <b>
+                  {" "}
+                  <i className='fa fa-plus'></i> Ajouter un utilisateur
+                </b>
+              </Button>
+            </Link>
           </div>
         </div>
         <div className='card-body'>

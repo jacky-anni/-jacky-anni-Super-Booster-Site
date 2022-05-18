@@ -10,7 +10,18 @@ import {
   LOGOUT_SUCCESS,
   ADD_USER,
   ADD_USER_SUCCESS,
-  ADD_USER_ERROR
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
+  ADD_USER_ERROR,
+  VALIDATE_EMAIL,
+  VALIDATE_EMAIL_ERROR,
+  ADD_PASSWORD,
+  ADD_PASSWORD_ERROR,
+  ACTIVE_USER,
+  DISABLE_USER,
+  DELETE_USER,
+  CLEAR,
+  GET_PHOTO_USER
 } from "./../actions/types";
 import cookie from "react-cookies";
 const initialState = {
@@ -20,7 +31,10 @@ const initialState = {
   loading: true,
   errors: null,
   filtered: null,
-  isAuthentificated: false
+  isAuthentificated: false,
+  validate: false,
+  add_password: false,
+  photoUser: null
 };
 
 export default (state = initialState, action) => {
@@ -29,9 +43,10 @@ export default (state = initialState, action) => {
     case LOAD_USER:
       return {
         ...state,
-        user: action.payload,
-        isAuthentificated: true,
-        loading: false
+        user: action.payload.data,
+        loading: false,
+        photoUser: action.payload.photo,
+        isAuthentificated: true
       };
 
     // login fuser
@@ -48,7 +63,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: action.payload,
-        loading: false
+        loading: false,
+        isAuthentificated: true
       };
 
     case SEARCH_USERS:
@@ -86,17 +102,124 @@ export default (state = initialState, action) => {
       };
 
     case ADD_USER_SUCCESS:
-      cookie.save("add_user", true);
       return {
         ...state,
         users: [...state.users, action.payload],
-        user_: action.payload
+        user_: action.payload,
+        validate: true,
+        errors: null
+      };
+
+    // edit user
+    case EDIT_USER_SUCCESS:
+    // active user
+    case ACTIVE_USER:
+      return {
+        ...state,
+        users: state.users.map(user =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+        loading: false,
+        validate: true
+      };
+
+    // disable user
+    case DISABLE_USER:
+      return {
+        ...state,
+        users: state.users.map(user =>
+          user.id === action.payload.id ? action.payload : user
+        ),
+        errors: null,
+        loading: false
+      };
+
+    // disable user
+    case DELETE_USER:
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.payload.id),
+        errors: null,
+        loading: false
+      };
+
+    case VALIDATE_EMAIL:
+      localStorage.setItem("tokenValidation", action.payload.token);
+      return {
+        ...state,
+        validate: true,
+        user: action.payload,
+        errors: null,
+        loading: false
+      };
+
+    case VALIDATE_EMAIL:
+      localStorage.setItem("tokenValidation", action.payload.token);
+      return {
+        ...state,
+        validate: true,
+        user: action.payload,
+        errors: null,
+        loading: false
+      };
+
+    case ADD_PASSWORD:
+      localStorage.removeItem("tokenValidation", action.payload.token);
+      return {
+        ...state,
+        validate: true,
+        user: action.payload,
+        errors: null,
+        add_password: true,
+        loading: false
+      };
+
+    //==============================================================================================================
+    case VALIDATE_EMAIL_ERROR:
+      return {
+        ...state,
+        validate: false,
+        errors: action.payload,
+        loading: false
+      };
+
+    case ERROR_USER:
+      return {
+        ...state,
+        validate: false,
+        errors: action.payload,
+        loading: false
+      };
+
+    // addd password
+    case ADD_PASSWORD_ERROR:
+      return {
+        ...state,
+        validate: false,
+        errors: action.payload,
+        loading: false
       };
 
     case ADD_USER_ERROR:
       return {
         ...state,
-        errors: action.payload
+        errors: action.payload,
+        validate: false
+      };
+
+    case EDIT_USER_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+        validate: false
+      };
+
+    // clear
+    case CLEAR:
+      return {
+        ...state,
+        validate: false,
+        errors: null
       };
 
     default:

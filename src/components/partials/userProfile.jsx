@@ -1,27 +1,43 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getUser, logout } from "./../../actions/userActions";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
+import Loader from "./../layout/loader";
+import { PropTypes } from "prop-types";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Skeleton, Space, Input } from "antd";
+import { useHistory } from "react-router-dom";
 
 const UserProfileBar = ({
-  user: { user, isAuthentificated, loading },
+  user: { user, isAuthentificated, photoUser, loading },
   getUser,
   logout
 }) => {
+  const history = useHistory();
+
   useEffect(async () => {
-    const user = getUser();
+    getUser();
   }, []);
 
   const logoutUser = () => {
     logout();
-    window.location.href = "/login";
+    history.push("/");
   };
+
+  if (!loading && !isAuthentificated) {
+    logout();
+    history.push("/");
+  }
 
   return (
     <>
-      {loading == true ? (
-        <Spin />
+      {user == null ? (
+        <Space>
+          <Skeleton.Button active={"active"} size={"default"} />
+          <Skeleton.Avatar active={"active"} size={33} shape={"circle"} />
+        </Space>
       ) : (
         <div className='nav-item dropdown'>
           <a
@@ -35,29 +51,34 @@ const UserProfileBar = ({
               id='kt_quick_user_toggle'
             >
               <span className='text-muted font-weight-bold font-size-base d-none d-md-inline mr-1'>
-                Hi sss
+                Salut, {user.prenom}
               </span>
-              <span className='text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3'></span>
+              {/* <span className='text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3'></span>
               <span className='symbol symbol-35 symbol-light-success'>
                 <span className='symbol-label font-size-h5 font-weight-bold'>
                   S
                 </span>
-              </span>
+              </span> */}
             </div>
-            {/* ddddd
-          <span className='avatar avatar-sm mr-8pt2'>
-            <span className='avatar-title rounded-circle bg-primary'>
-              <i className='material-icons'>account_box</i>
-            </span>
-          </span> */}
+
+            <Avatar src={photoUser} size={33} />
+
+            {/* <span className='avatar avatar-sm mr-8pt2'>
+              <span className='avatar-title rounded-circle bg-primary'>
+                <i className='material-icons'>account_box</i>
+              </span>
+            </span> */}
           </a>
           <div className='dropdown-menu dropdown-menu-right'>
             <div className='dropdown-header'>
-              <strong>Account</strong>
+              <strong>Mon compte</strong>
             </div>
-            <a className='dropdown-item' href='edit-account.html'>
-              Edit Account
-            </a>
+            <Link
+              to={`/dashboard/profile/${user.username}`}
+              className='dropdown-item'
+            >
+              Mon profile
+            </Link>
             <a className='dropdown-item' href='billing.html'>
               Billing
             </a>
@@ -68,12 +89,16 @@ const UserProfileBar = ({
               Logout
             </a>
           </div>
+          <Loader />
         </div>
       )}
     </>
   );
 };
 
+UserProfileBar.propTypes = {
+  user: PropTypes.object.isRequired
+};
 const mapStateToPros = state => ({
   user: state.user
 });

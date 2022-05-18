@@ -5,7 +5,6 @@ const Head = () => {
     <div className='application'>
       <Helmet>
         <meta charset='utf-8' />
-
         <meta name='viewport' content='width=device-width' />
         <meta name='theme-color' content='#000000' />
         <meta
