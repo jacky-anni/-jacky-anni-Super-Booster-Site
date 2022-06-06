@@ -51,7 +51,7 @@ const AddPassword = ({
               code: ""
             }}
             validationSchema={loginForm}
-            onSubmit={async values => {
+            onSubmit={(values, { resetForm }) => {
               // same shape as initial values
               // validateEmail(id, values);
               let token = localStorage.getItem("tokenValidation");
@@ -64,6 +64,7 @@ const AddPassword = ({
 
               // envoie les donnees
               addPassword(data);
+              resetForm();
             }}
           >
             {({ errors, touched, isValid }) => (

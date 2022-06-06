@@ -13,8 +13,7 @@ import { PropTypes } from "prop-types";
 import { ToastMessage } from "./../../layout/tost";
 import ShowErrors from "./../../layout/showErrors";
 import { pays } from "./../../ultils/main";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import LoadingCharging from "./../../layout/loadingCharging";
 
 const ProfileInformation = ({
   profile: { errors, validate, profile, loading, profileInfo },
@@ -42,12 +41,19 @@ const ProfileInformation = ({
   const [loading_, setLoading_] = useState(false);
   const { username } = useParams();
   const [pays_, setPays_] = useState([]);
-  const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
 
   useEffect(async () => {
     getInfoProfile(username);
     const pay = await pays();
     setPays_(pay);
+
+    if (validate) {
+      console.log("YES");
+      clear();
+      setLoading_(false);
+    } else {
+      console.log("NO");
+    }
   }, []);
 
   var initialValues = {};
@@ -89,9 +95,8 @@ const ProfileInformation = ({
             validationSchema={createForm}
             onSubmit={async values => {
               // same shape as initial values
-              setLoading_(true);
+              // setLoading_(true);
               createProfile(values, profile.id_);
-              setLoading_(false);
             }}
             enableReinitialize
           >
@@ -311,9 +316,7 @@ const ProfileInformation = ({
                     </div>
                   </Form>
                 ) : (
-                  <center>
-                    <Spin indicator={antIcon} />
-                  </center>
+                  <LoadingCharging />
                 )}
               </>
             )}

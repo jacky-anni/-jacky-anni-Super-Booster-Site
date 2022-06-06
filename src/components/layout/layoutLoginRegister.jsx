@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 const LayoutLoginRegister = ({ children, title, newAcocount }) => {
+  console.log("ffff");
+
   return (
     <>
       <body
@@ -68,6 +70,7 @@ const LayoutLoginRegister = ({ children, title, newAcocount }) => {
                   {/*begin::Signin*/}
                   <div className='login-form'>
                     {/*begin::Form*/}
+
                     {children}
                   </div>
                   {/*end::Signin*/}

@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import { editUser, clear } from "./../../actions/userActions";
 import ShowErrors from "./../layout/showErrors";
 import { ToastMessage } from "./../layout/tost";
-import cookie from "react-cookies";
-import { useHistory } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
 const EditUser = ({
@@ -31,12 +29,15 @@ const EditUser = ({
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [loading_, setLoading_] = useState(false);
 
-  let history = useHistory();
-
   useEffect(() => {
     if (validate) {
       clear();
+      setLoading_(false);
       setVisible(false);
+    }
+
+    if (errors) {
+      setLoading_(false);
     }
   });
 
@@ -47,15 +48,6 @@ const EditUser = ({
   const handleOk = () => {
     setVisible(false);
     setConfirmLoading(false);
-
-    // setConfirmLoading(true);
-    // setLoading_(true);
-    // setTimeout(() => {
-    //   setVisible(false);
-    //   setConfirmLoading(false);
-    //   cookie.remove("add_user", false);
-    // }, 2000);
-    // setLoading_(true);
   };
 
   const handleCancel = () => {
@@ -81,10 +73,6 @@ const EditUser = ({
             // same shape as initial values
             setLoading_(true);
             editUser(values, user_.id);
-            setLoading_(false);
-            if (validate) {
-              setVisible(false);
-            }
           }}
         >
           {({ errors, touched, isValid }) => (

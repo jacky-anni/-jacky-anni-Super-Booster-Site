@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import Users from "./users";
 import { connect } from "react-redux";
 import PageTitle from "./../partials/pageTile";
@@ -6,19 +6,20 @@ import Head from "./../partials/head";
 import CreateUser from "./create";
 import { Modal, Button } from "antd";
 import { Link, useLocation } from "react-router-dom";
+import { getUser } from "./../../actions/userActions";
+import { PropTypes } from "prop-types";
+import NotAccess from "./../layout/notAccess";
 
-const UserHome = () => {
-  const [link, setLink] = useState();
-  const location = useLocation();
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-  });
+const UserHome = ({ user: { loading, user } }) => {
+  useEffect(async () => {
+    await getUser();
+  }, [user]);
 
   return (
     <>
       <Head />
       <PageTitle title='Utilisateurs' />
+
       <div className='card card-custom'>
         <div className='card-header flex-wrap border-0 pt-6 pb-0'>
           <div className='card-title'>
@@ -30,14 +31,16 @@ const UserHome = () => {
             </h3>
           </div>
           <div className='card-toolbar'>
-            <Link to='/dashboard/users/create'>
-              <Button type='primary'>
-                <b>
-                  {" "}
-                  <i className='fa fa-plus'></i> Ajouter un utilisateur
-                </b>
-              </Button>
-            </Link>
+            {user && user.droit == "Administrateur" ? (
+              <Link to='/dashboard/users/create'>
+                <Button type='primary'>
+                  <b>
+                    {" "}
+                    <i className='fa fa-plus'></i> Ajouter un utilisateur
+                  </b>
+                </Button>
+              </Link>
+            ) : null}
           </div>
         </div>
         <div className='card-body'>
@@ -50,4 +53,14 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+UserHome.propTypes = {
+  user: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(
+  mapStateToProps,
+  { getUser }
+)(UserHome);

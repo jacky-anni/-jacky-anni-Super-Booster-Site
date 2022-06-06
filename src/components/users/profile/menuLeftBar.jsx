@@ -1,6 +1,7 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
-const MenuLeftBar = () => {
+const MenuLeftBar = ({ username }) => {
   return (
     <>
       <div className='col-md-3'>
@@ -9,18 +10,21 @@ const MenuLeftBar = () => {
             <div class='example-preview'>
               <ul class='navi'>
                 <li class='navi-item'>
-                  <a class='navi-link' href='#'>
+                  <Link
+                    to={`/dashboard/course/create/${username}`}
+                    class='navi-link'
+                  >
                     <span class='navi-icon'>
-                      <i class='flaticon2-chat-1'></i>
+                      <i class='flaticon-medal'></i>
                     </span>
-                    <span class='navi-text'>Messages</span>
+                    <span class='navi-text'>Formations</span>
                     <span class='navi-label'>
                       <span class='label label-light-info font-weight-bold'>
                         2
                       </span>
                     </span>
                     <span class='navi-arrow'></span>
-                  </a>
+                  </Link>
                 </li>
                 <li class='navi-item'>
                   <a class='navi-link' href='#'>

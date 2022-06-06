@@ -1,3 +1,7 @@
+import EditCategory from "./editCategory";
+import DeleteCategory from "./deleteCategory";
+import { Empty } from "antd";
+
 const CategoryItem = ({ categorie }) => {
   return (
     <>
@@ -25,14 +29,11 @@ const CategoryItem = ({ categorie }) => {
                 {/* <label className='btn btn-danger'>
                   <i className='fa fa-lock'></i>
                 </label> */}
-
-                <label className='btn btn-primary mr-1'>
-                  <i className='fa fa-edit'></i>
-                </label>
-
-                <label className='btn btn-danger'>
+                <EditCategory categorie_={categorie} />
+                <DeleteCategory category_={categorie} />
+                {/* <label className='btn btn-danger'>
                   <i className='fa fa-trash'></i>
-                </label>
+                </label> */}
               </div>
             </div>
           </div>

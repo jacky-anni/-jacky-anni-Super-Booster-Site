@@ -43,9 +43,10 @@ const ValidateEmail = ({
               code: ""
             }}
             validationSchema={loginForm}
-            onSubmit={async values => {
+            onSubmit={(values, { resetForm }) => {
               // same shape as initial values
               validateEmail(id, values);
+              resetForm();
             }}
           >
             {({ errors, touched, isValid }) => (

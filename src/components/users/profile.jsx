@@ -33,7 +33,7 @@ const Profile = ({
           {!errors ? (
             <>
               <Banner />
-              <MenuLeftBar />
+              <MenuLeftBar username={username} />
               <InformationUser user={profile} />
             </>
           ) : (

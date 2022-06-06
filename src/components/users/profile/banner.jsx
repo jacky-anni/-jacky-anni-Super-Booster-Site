@@ -3,8 +3,7 @@ import axios from "axios";
 import Photo from "./photo";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Avatar } from "antd";
-import { Skeleton } from "antd";
+import { Avatar, Skeleton, Spin } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import {
   getProfile,
@@ -77,13 +76,10 @@ const Banner = ({
                         {profile.prenom} {profile.nom}
                       </a>
                       <div className='d-flex flex-wrap my-2'>
-                        <a
-                          href='#'
-                          className='text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2'
-                        >
+                        <span className='text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2'>
                           <i className='fa fa-envelope'></i>&nbsp;
                           {profile.email}
-                        </a>
+                        </span>
                         <a
                           href='#'
                           className='text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2'
@@ -91,27 +87,18 @@ const Banner = ({
                           <i className='fa fa-address-card'></i>&nbsp;{" "}
                           {profile.role}
                         </a>
-                        <a
-                          href='#'
-                          className='text-muted text-hover-primary font-weight-bold'
-                        >
+                        <span className='text-muted text-hover-primary font-weight-bold'>
                           <i className='fa fa-user'></i> {profile.droit}
-                        </a>
+                        </span>
                       </div>
                     </div>
                     <div className='my-lg-0 my-1'>
-                      <a
-                        href='#'
-                        className='btn btn-sm btn-light-primary font-weight-bolder mr-2'
-                      >
+                      <span className='btn btn-sm btn-light-primary font-weight-bolder mr-2'>
                         Contact
-                      </a>
-                      <a
-                        href='#'
-                        className='btn btn-sm btn-primary font-weight-bolder'
-                      >
+                      </span>
+                      <span className='btn btn-sm btn-primary font-weight-bolder'>
                         Hire me
-                      </a>
+                      </span>
                     </div>
                   </div>
                   <div className='d-flex align-items-center flex-wrap justify-content-between'>
@@ -126,7 +113,7 @@ const Banner = ({
               </div>
             </div>
           ) : (
-            NotAccess
+            <NotAccess errror={"erreur"} />
           )}
         </div>
       )}

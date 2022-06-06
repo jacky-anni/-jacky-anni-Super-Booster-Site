@@ -9,9 +9,8 @@ import { PropTypes } from "prop-types";
 import { ToastMessage } from "./../../layout/tost";
 import ShowErrors from "./../../layout/showErrors";
 import { pays } from "./../../ultils/main";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import { logout } from "./../../../actions/userActions";
+import LoadingCharging from "./../../layout/loadingCharging";
 
 const ChangePassword = ({
   profile: { errors, validate, editPasswordStatus, loading },
@@ -38,14 +37,19 @@ const ChangePassword = ({
 
   const [loading_, setLoading_] = useState(false);
   const { username } = useParams();
-  const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
+
   let history = useHistory();
 
   useEffect(() => {
     if (editPasswordStatus) {
       clear();
       logout();
+      setLoading_(false);
       history.push("/");
+    }
+
+    if (errors) {
+      setLoading_(false);
     }
   });
 
@@ -71,7 +75,6 @@ const ChangePassword = ({
               setLoading_(true);
 
               editPassword(values);
-              setLoading_(false);
             }}
             enableReinitialize
           >
@@ -161,9 +164,7 @@ const ChangePassword = ({
                     </div>
                   </Form>
                 ) : (
-                  <center>
-                    <Spin indicator={antIcon} />
-                  </center>
+                  <LoadingCharging />
                 )}
               </>
             )}

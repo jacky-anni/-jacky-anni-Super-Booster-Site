@@ -9,21 +9,20 @@ import { connect } from "react-redux";
 import { getUsers } from "./../../actions/userActions";
 import PropTypes from "prop-types";
 import SearchUsers from "./searchUsers";
+import NotAccess from "./../layout/notAccess";
 
 const Users = ({
-  user: { users, loading, filtered },
+  user: { errors, users, loading, filtered },
   getUsers,
   searchUsers
 }) => {
   const [users_, setUsers_] = useState(users);
 
   useEffect(async () => {
-    try {
-      getUsers();
-      if (filtered !== null) {
-        setUsers_({ filtered });
-      }
-    } catch (error) {}
+    getUsers();
+    if (filtered !== null) {
+      setUsers_({ filtered });
+    }
   }, []);
 
   const columns = [
@@ -60,10 +59,6 @@ const Users = ({
           rowKey='id'
         />
       )}
-
-      {/* {
-        <Skeleton />
-      } */}
     </>
   );
 };

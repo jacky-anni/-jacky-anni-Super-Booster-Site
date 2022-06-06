@@ -78,7 +78,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        validate: true
+        validate: true,
+        profileInfo: action.payload
       };
 
     case ADD_BIOGRAPHIE:

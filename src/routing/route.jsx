@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { Route } from "react-router-dom";
 import Layout from "./../components/layout/layout";
 import LayoutLoginRegister from "./../components/layout/layoutLoginRegister";
 

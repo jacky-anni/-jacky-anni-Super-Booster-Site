@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikActions } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import ShowErrors from "./../layout/showErrors";
 import { ToastMessage } from "./../layout/tost";
-import { useHistory } from "react-router-dom";
+
 import { PropTypes } from "prop-types";
 import { addCategory, clear } from "./../../actions/categoryActions";
 
 const CreateCategory = ({
-  category: { errors, loading, validate },
+  category: { errors, loading, categorie, validate },
   addCategory,
   clear
 }) => {
@@ -23,21 +23,28 @@ const CreateCategory = ({
       .max(100, "Taille limite 50 caracteres")
   });
 
-  const [visible, setVisible] = React.useState(false);
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [loading_, setLoading_] = useState(false);
 
   const [initialValues, setInitialValues] = useState({
-    nom: "ssss",
+    nom: "",
     description: ""
   });
-
-  let history = useHistory();
 
   useEffect(() => {
     if (validate) {
       clear();
+      setInitialValues({
+        nom: "",
+        description: ""
+      });
+      setLoading_(false);
       setVisible(false);
+    }
+
+    if (errors) {
+      setLoading_(false);
     }
   });
 
@@ -51,6 +58,11 @@ const CreateCategory = ({
   };
 
   const handleCancel = () => {
+    clear();
+    setInitialValues({
+      nom: "",
+      description: ""
+    });
     setVisible(false);
   };
 
@@ -64,12 +76,15 @@ const CreateCategory = ({
           validateOnMount={true}
           validationSchema={createForm}
           initialValues={initialValues}
-          onSubmit={async values => {
+          onSubmit={(values, { resetForm }) => {
             // same shape as initial values
             setLoading_(true);
-
+            setInitialValues({
+              nom: values.nom,
+              description: values.description
+            });
             addCategory(values);
-            setLoading_(false);
+            resetForm();
           }}
         >
           {({ errors, touched, isValid }) => (
@@ -128,7 +143,7 @@ const CreateCategory = ({
                         : ""
                     }`}
                   >
-                    <i className='fa fa-plus'></i> Ajouter
+                    <b>{loading_ ? " Chargement..." : " Ajouter"}</b>
                   </button>
                 </div>
               </Form>
@@ -143,7 +158,6 @@ const CreateCategory = ({
     <>
       <Button type='primary' onClick={showModal}>
         <b>
-          {" "}
           <i className='fa fa-plus text-truncate '></i> Ajouter Categorie
         </b>
       </Button>

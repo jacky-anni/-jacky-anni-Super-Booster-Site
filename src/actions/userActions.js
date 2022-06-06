@@ -2,6 +2,7 @@ import {
   SEARCH_USERS,
   CLEAR_FILTER,
   GET_USERS,
+  GET_USERS_ERROR,
   SET_LOADING,
   AUTH_USER,
   SUCCCESS_LOGIN,
@@ -32,13 +33,19 @@ import { errors } from "./../components/ultils/errors";
 import { ToastMessage } from "./../components/layout/tost";
 
 export const getUsers = () => async dispatch => {
-  const res = await axios.get("/api/admin/users");
-  const data = await res.data;
-
-  dispatch({
-    type: GET_USERS,
-    payload: data
-  });
+  try {
+    const res = await axios.get("/api/admin/users");
+    dispatch({
+      type: GET_USERS,
+      payload: res.data
+    });
+  } catch (error) {
+    const err = errors(error);
+    dispatch({
+      type: GET_USERS_ERROR,
+      payload: err
+    });
+  }
 };
 
 export const searchUsers = text => async dispatch => {

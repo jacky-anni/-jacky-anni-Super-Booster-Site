@@ -5,7 +5,6 @@ const CategorieHome = () => {
   return (
     <>
       <PageTitle title='Categories' />
-
       <Categories />
     </>
   );

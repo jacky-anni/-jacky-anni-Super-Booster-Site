@@ -2,6 +2,7 @@ import {
   SEARCH_USERS,
   CLEAR_FILTER,
   GET_USERS,
+  GET_USERS_ERROR,
   AUTH_USER,
   SUCCCESS_LOGIN,
   FAIL_LOGIN,
@@ -175,6 +176,13 @@ export default (state = initialState, action) => {
       };
 
     //==============================================================================================================
+    case GET_USERS_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+        loading: false
+      };
+
     case VALIDATE_EMAIL_ERROR:
       return {
         ...state,

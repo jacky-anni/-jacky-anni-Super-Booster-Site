@@ -19,8 +19,8 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
 
   useEffect(() => {
     if (isAuthentificated) {
-      // window.location.replace("/dashboard");
-      history.push("/dashboard");
+      window.location.replace("/dashboard");
+      // history.push("/dashboard");
     }
   });
 
@@ -37,19 +37,20 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
           </a>
         </div> */}
       </div>
-      <div className=''>
+      <div>
         {errors ? <ShowErrors errors={errors} type={"danger"} /> : null}
 
-        <div className=''>
+        <div>
           <Formik
             initialValues={{
               email: "",
               password: ""
             }}
             validationSchema={loginForm}
-            onSubmit={async values => {
+            onSubmit={(values, { resetForm }) => {
               // same shape as initial values
               login(values);
+              resetForm();
             }}
           >
             {({ errors, touched, isValid }) => (
@@ -94,7 +95,7 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
                     to='/change-password'
                     // style={{ float: "right" }}
 
-                    class='text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5'
+                    className='text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5'
                   >
                     <center>Mot de passe oublié ?</center>
                   </Link>
@@ -121,7 +122,7 @@ const Login = ({ user: { isAuthentificated, errors }, login }) => {
   );
 };
 
-Login.propTypes = { profile: PropTypes.object.isRequired };
+Login.propTypes = { user: PropTypes.object.isRequired };
 const mapStateToProps = state => ({
   user: state.user
 });

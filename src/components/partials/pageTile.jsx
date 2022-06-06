@@ -1,5 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { Spin } from "antd";
+
 const PageTitle = ({ title }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  });
+
   return (
     <>
       <div

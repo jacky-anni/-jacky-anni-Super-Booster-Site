@@ -1,5 +1,7 @@
+// USERS
 export const SEARCH_USERS = "SEARCH_USERS";
 export const GET_USERS = "GET_USERS";
+export const GET_USERS_ERROR = "GET_USERS_ERROR";
 export const SET_LOADING = "SET_LOADING";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 export const AUTH_USER = "AUTH_USER";
@@ -34,11 +36,32 @@ export const DELETE_USER = "DELETE_USER";
 export const EDIT_PASSWORD = "EDIT_PASSWORD";
 export const EDIT_PASSWORD_ERROR = "EDIT_PASSWORD_ERROR";
 //==========================================================================================
-// CATEGORIE
+// CATEGORIES
 export const CATEGORIES = "CATEGORIES";
 export const CATEGORIES_ERROR = "CATEGORIES_ERROR";
 export const ADD_CATEGORIE = "ADD_CATEGORIE";
 export const ADD_CATEGORIE_ERROR = "ADD_CATEGORIE_ERROR";
+export const EDIT_CATEGORIE = "EDIT_CATEGORIE";
+export const EDIT_CATEGORIE_ERROR = "EDIT_CATEGORIE_ERROR";
+export const DELETE_CATEGORIE = "DELETE_CATEGORIE";
+export const DELETE_CATEGORIE_ERROR = "DELETE_CATEGORIE_ERROR";
+export const GET_CATEGORIE = "GET_CATEGORIE";
+export const GET_CATEGORIE_ERROR = "GET_CATEGORIE_ERROR";
+
+//==========================================================================================
+//COURSES
+export const COURSES = "COURSES";
+export const COURSES_ERROR = "COURSES_ERROR";
+export const SEARCH_COURSES = "SEARCH_COURSES";
+export const ADD_COURSE = "ADD_COURSE";
+export const ADD_COURSE_ERROR = "ADD_COURSE_ERROR";
+export const ADD_DESCRIPTION = "ADD_DESCRIPTION";
+export const ADD_DESCRIPTION_ERROR = "ADD_DESCRIPTION_ERROR";
+export const GET_COURSE = "GET_COURSE";
+export const GET_COURSE_ERROR = "GET_COURSE_ERROR";
+export const ACTIVE_COURSE = "ACTIVE_COURSE";
+export const DISABLE_COURSE = "DISABLE_COURSE";
+export const DELETE_COURSE = "DELETE_COURSE";
 
 //==========================================================================================
 
