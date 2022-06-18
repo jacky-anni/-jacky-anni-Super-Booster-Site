@@ -10,6 +10,7 @@ import { getProfile, getImageProfile } from "./../../actions/profileActions.";
 import NotAccess from "./../layout/notAccess";
 import Description from "./descriptions";
 import LoadingCharging from "./../layout/loadingCharging";
+import Loader from "./../layout/loader";
 
 const CreateCourse = ({
   course: { loading, course, validate },
@@ -48,7 +49,7 @@ const CreateCourse = ({
                       <CourseCreator
                         profile={profile}
                         photo={photo}
-                        course_={course.formation}
+                        course_={course}
                       />
                     ) : (
                       <CourseCreator
@@ -112,7 +113,7 @@ const CreateCourse = ({
                           {course ? (
                             <BasicInformation
                               creator={profile.id_}
-                              course_={course.formation}
+                              course_={course}
                             />
                           ) : (
                             <BasicInformation
@@ -131,7 +132,7 @@ const CreateCourse = ({
                           aria-labelledby='kt_tab_pane_2_4'
                         >
                           {course ? (
-                            <Description course_={course.formation} />
+                            <Description course_={course} />
                           ) : (
                             <Description course_={null} />
                           )}
@@ -146,7 +147,7 @@ const CreateCourse = ({
                       <div className='card-body d-flex align-items-center py-5 py-lg-10'>
                         <div className>
                           <h3 className='pb-1 text-dark-75 font-weight-bolder text-danger font-size-h5'>
-                            <i className='flaticon2-delete text-danger'></i>{" "}
+                            <i className='flaticon2-delete text-danger'></i>
                             Vous ne puvez pas voir cette formation
                           </h3>
                         </div>
@@ -159,7 +160,7 @@ const CreateCourse = ({
               </div>
             </div>
           ) : (
-            <LoadingCharging />
+            <Loader />
           )}
         </>
       ) : (

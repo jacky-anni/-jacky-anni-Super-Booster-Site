@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getUser } from "./../../actions/userActions";
 import { PropTypes } from "prop-types";
 import NotAccess from "./../layout/notAccess";
+import Loader from "./../layout/loader";
 
 const UserHome = ({ user: { loading, user } }) => {
   useEffect(async () => {
@@ -17,9 +18,9 @@ const UserHome = ({ user: { loading, user } }) => {
 
   return (
     <>
+      {loading ? <Loader /> : null}
       <Head />
       <PageTitle title='Utilisateurs' />
-
       <div className='card card-custom'>
         <div className='card-header flex-wrap border-0 pt-6 pb-0'>
           <div className='card-title'>

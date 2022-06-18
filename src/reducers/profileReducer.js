@@ -47,7 +47,6 @@ export default (state = initialState, action) => {
         loading: false,
         photo: action.payload,
         errors: null,
-        profileInfo: null,
         profileInfo: state.profileInfo,
         validate: false
       };

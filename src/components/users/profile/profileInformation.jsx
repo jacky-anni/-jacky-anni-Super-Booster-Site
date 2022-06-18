@@ -3,6 +3,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import "yup-phone";
 import { connect } from "react-redux";
+import ReactCountryFlag from "react-country-flag";
+
 import {
   getInfoProfile,
   clear,
@@ -48,11 +50,8 @@ const ProfileInformation = ({
     setPays_(pay);
 
     if (validate) {
-      console.log("YES");
       clear();
       setLoading_(false);
-    } else {
-      console.log("NO");
     }
   }, []);
 
@@ -157,11 +156,9 @@ const ProfileInformation = ({
                             }`}
                           >
                             <option value=''>Choisir un pays</option>
-
                             {pays_.map(pays => (
-                              <option key={pays.code} value={pays.nom}>
-                                {" "}
-                                {pays.nom}{" "}
+                              <option key={pays.alpha2} value={pays.name}>
+                                {pays.name}
                               </option>
                             ))}
                           </Field>

@@ -39,6 +39,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  //k
   switch (action.type) {
     // Load user
     case LOAD_USER:

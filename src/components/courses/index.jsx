@@ -6,12 +6,14 @@ import { getUser } from "./../../actions/userActions";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { PropTypes } from "prop-types";
+import Loader from "./../layout/loader";
+import { coursesList } from "./../../actions/coursesActions";
 
 const CoursesHome = ({ user: { loading, user }, getUser }) => {
   return (
     <>
+      {loading ? <Loader /> : null}
       <PageTitle title='Formations' />
-
       <div className='card card-custom'>
         <div className='card-header'>
           <div className='card-title'>

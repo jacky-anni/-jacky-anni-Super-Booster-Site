@@ -37,7 +37,7 @@ const Courses = ({ course: { courses, loading, filtered }, coursesList }) => {
   return (
     <>
       <SearchCourses />
-      {loading == true ? (
+      {loading ? (
         <span style={{ padding: 50 }}>
           <Skeleton active avatar paragraph={{ rows: 1 }} />
           <Skeleton active avatar paragraph={{ rows: 1 }} />

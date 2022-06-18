@@ -39,7 +39,6 @@ export default (state = initialState, action) => {
     case ADD_CATEGORIE:
       return {
         ...state,
-        validate: false,
         categories: [...state.categories, action.payload],
         categorie: action.payload,
         validate: true,

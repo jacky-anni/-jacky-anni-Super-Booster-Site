@@ -1,17 +1,31 @@
 import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { PictureOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import ActiveCourse from "./activeCourse";
 import DisableCourse from "./disableCourse";
 import DeleteCourse from "./deleteCourse";
+import { useState, useEffect } from "react";
+
 const CoursesItemList = ({ course }) => {
+  const [img, setImg] = useState();
+  useEffect(async () => {
+    if (course.photo !== null) {
+      const data = await fetch(`/images/courses/${course.photo}`);
+      setImg(data.url);
+    }
+  });
   return (
     <>
       <div className='posts-cards mb-24pt'>
         <div className='card posts-card' style={{ padding: "5px" }}>
           <div className='posts-card__content d-flex align-items-center flex-wrap'>
             <div className='avatar avatar-lg mr-3'>
-              <Avatar shape='square' size={50} icon={<UserOutlined />} />
+              <Avatar
+                shape='square'
+                src={img}
+                size={50}
+                icon={<PictureOutlined />}
+              />
             </div>
             <div className='posts-card__title flex d-flex flex-column'>
               <Link

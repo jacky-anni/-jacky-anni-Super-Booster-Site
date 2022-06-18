@@ -20,6 +20,7 @@ const Banner = ({
   getImageProfile,
   getUser
 }) => {
+  //yyyy
   const { username } = useParams();
   useEffect(() => {
     getProfile(username);

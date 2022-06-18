@@ -7,11 +7,10 @@ import UserProfileBar from "./../partials/userProfile";
 import Notifications from "./../partials/notification";
 import Footer from "./../partials/footer";
 import ToolBar from "./../partials/toolsBar";
-import Loader from "./loader";
 import { useMediaQuery } from "react-responsive";
 
 const Layout = ({ children }) => {
-  const [loading_, setLoading_] = useState(false);
+  const [loading_, setLoading_] = useState(true);
 
   // const ref = useRef();
   // useEffect(() => {
@@ -19,8 +18,8 @@ const Layout = ({ children }) => {
   // });
 
   // then, later in another hook or something
-  useLayoutEffect(() => {
-    setLoading_(true);
+  useEffect(() => {
+    setLoading_(false);
   });
 
   const isDesktopOrLaptop = useMediaQuery({
@@ -65,10 +64,6 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-        {/* {loading_ ? <Loader /> : null}
-
-        {console.log(loading_)} */}
-
         <div className='container'>
           {/* <div>
             <h1>Device Test!</h1>
@@ -81,7 +76,8 @@ const Layout = ({ children }) => {
             {isRetina && <p>You are retina</p>}
           </div> */}
 
-          {!loading_ ? <Loader /> : children}
+          {/* {loading_ ? <Loader /> : null} */}
+          {children}
         </div>
         <Footer />
       </div>

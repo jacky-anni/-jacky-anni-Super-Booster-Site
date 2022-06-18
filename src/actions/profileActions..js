@@ -36,7 +36,7 @@ export const getProfile = username => async dispatch => {
   }
 };
 
-export const changePhoto = (photo, status) => async dispatch => {
+export const changePhoto = (photo, status, course) => async dispatch => {
   try {
     const res = await axios.post(
       `/api/admin/save-photo/${status}`,
@@ -58,6 +58,7 @@ export const changePhoto = (photo, status) => async dispatch => {
     });
   }
 };
+
 export const getImageProfile = username => async dispatch => {
   try {
     const user = await axios.get(`/api/admin/profile/${username}`, headers);

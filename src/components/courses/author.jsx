@@ -3,6 +3,8 @@ import { UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
 
 const Author = ({ author }) => {
   const [img, setImg] = useState();
@@ -10,6 +12,8 @@ const Author = ({ author }) => {
     if (author.photo !== null) {
       const data = await fetch(`/images/users/${author.photo}`);
       setImg(data.url);
+    } else {
+      setImg("");
     }
   });
   return (

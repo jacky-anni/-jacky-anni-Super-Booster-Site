@@ -13,20 +13,11 @@ import LoadingCharging from "./../layout/loadingCharging";
 import Loader from "./../layout/loader";
 import Photo from "./photo";
 
-const ShowCourse = ({
-  course: { errors, loading, course, author, validate },
-  profile: { profile, photo },
-  getProfile,
-
-  getImageProfile,
-  getCourse
-}) => {
+const ShowCourse = ({ course: { errors, loading, course }, getCourse }) => {
   const { courseLink } = useParams();
-  const [check, setCheck] = useState();
 
   useEffect(() => {
     getCourse(courseLink);
-    setCheck(false);
   }, []);
 
   return (
@@ -39,34 +30,22 @@ const ShowCourse = ({
           <>
             {course ? (
               <>
-                <CourseBanner
-                  course={course.formation}
-                  profile_={course.utilisateur}
-                />
+                <CourseBanner course={course} />
                 <div className='row'>
                   <div className='col-md-4'>
                     <div className='row'>
-                      <div className='col-md-4'>
-                        <Photo />
-                      </div>
-
-                      <div className='col-md-8'>
-                        <h1>sssksskssk</h1>
-                      </div>
+                      <Photo course_={course} />
                     </div>
-                    <MenuLeftBar />
+                    <MenuLeftBar course_={course} />
                   </div>
 
                   <div className='col-md-8'>
-                    <ShowAllDescription
-                      course_={course.formation}
-                      profile_={course.utilisateur}
-                    />
+                    <ShowAllDescription course_={course} />
                   </div>
                 </div>
               </>
             ) : (
-              <LoadingCharging />
+              <Loader />
             )}
           </>
         ) : (
@@ -78,15 +57,13 @@ const ShowCourse = ({
 };
 
 ShowCourse.propTypes = {
-  course: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  course: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  course: state.course,
-  profile: state.profile
+  course: state.course
 });
 
 export default connect(
   mapStateToProps,
-  { getProfile, getCourse, getImageProfile }
+  { getCourse }
 )(ShowCourse);

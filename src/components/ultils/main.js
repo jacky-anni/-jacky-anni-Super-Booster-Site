@@ -4,7 +4,16 @@ import { ToastMessage } from "./../layout/tost";
 
 export const pays = async () => {
   try {
-    const res = await axios.get("/api/admin/contry");
+    const res = await axios.get("/api/admin/contries");
+    return res.data;
+  } catch (error) {
+    ToastMessage("Erreur serveur", "error");
+  }
+};
+
+export const languages = async () => {
+  try {
+    const res = await axios.get("/api/admin/languages");
     return res.data;
   } catch (error) {
     ToastMessage("Erreur serveur", "error");
@@ -12,10 +21,5 @@ export const pays = async () => {
 };
 
 // export const langue = async () => {
-//   try {
-//     const res = await axios.get("/api/admin/contry");
-//     return res.data;
-//   } catch (error) {
-//     ToastMessage("Erreur serveur", "error");
-//   }
+//   return ISO6391.getName("fr");
 // };

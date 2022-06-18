@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUser, logout } from "./../../actions/userActions";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
-import Loader from "./../layout/loader";
+
 import { PropTypes } from "prop-types";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
@@ -89,7 +89,6 @@ const UserProfileBar = ({
               Logout
             </a>
           </div>
-          <Loader />
         </div>
       )}
     </>

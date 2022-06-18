@@ -1,5 +1,5 @@
 import Author from "./author";
-const CourseBanner = ({ course, profile_ }) => {
+const CourseBanner = ({ course }) => {
   return (
     <>
       <div className='row card card-custom'>
@@ -17,12 +17,8 @@ const CourseBanner = ({ course, profile_ }) => {
                     </h4>
                     <p className='lead text-white-50 measure-hero-lead'>
                       It’s not every day that one of the most important
-                      front-end libraries in web development gimport Author from
-                      './Author'; ets a complete overhaul. Keep your skills
-                      relevant and up-to-date with this comprehensive
-                      introduction to Google’s popular community project.
                     </p>
-                    <div className='d-flex flex-column flex-sm-row mb-10 align-items-center justify-content-start'>
+                    {/* <div className='d-flex flex-column flex-sm-row mb-10 align-items-center justify-content-start'>
                       <a
                         href='student-lesson.html'
                         className='btn btn-outline-white mb-16 mb-sm-0 mr-sm-16'
@@ -35,13 +31,15 @@ const CourseBanner = ({ course, profile_ }) => {
                       <a href='pricing.html' className='btn btn-white'>
                         Start your free trial
                       </a>
-                    </div>
+                    </div> */}
+
+                    {/* ddddd */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <Author author={profile_} />
+          <Author author={course.Utilisateur} />
         </div>
       </div>
     </>

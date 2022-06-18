@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useLayoutEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
@@ -10,6 +10,8 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import NotAccess from "./../layout/notAccess";
 import LoadingCharging from "./../layout/loadingCharging";
+import Loader from "./../layout/loader";
+import { languages } from "./../ultils/main";
 const queryString = require("query-string");
 
 const BasicInformation = ({
@@ -17,8 +19,8 @@ const BasicInformation = ({
   category: { categories, loading },
   createCourse,
   categoriesList,
-  creator,
   course_,
+  creator,
   clear
 }) => {
   const createForm = Yup.object().shape({
@@ -31,11 +33,10 @@ const BasicInformation = ({
     modalite: Yup.string().required("Ce champ est obligatoire !"),
     duree: Yup.string().required("Ce champ est obligatoire !"),
     note: Yup.number()
-      .positive()
       .required("Entrer un nombre valide")
       .min(60, "La note ne doit pas être inferieur à 60")
-      .max(100, "La note ne doit pas être supérieur à 100"),
-    prix: Yup.number().positive()
+      .max(100, "La note ne doit pas être supérieur à 100")
+    // prix: Yup.number().positive()
     // date_fin: Yup.date("Entrer une date valide").max(
     //   Yup.ref("date_debut"),
     //   "La date de début ne doit pas être inferirur à la date de fin"
@@ -46,19 +47,33 @@ const BasicInformation = ({
   let location = useLocation();
   const parsed = queryString.parse(location.search);
   const courseLink = parsed.course;
+  const [langues_, setLangues_] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
+    // selectinner les langues
+    const langue = await languages();
+
+    setLangues_(langue);
+    // afficher les categories
     categoriesList();
+    // so in validate
     if (validate) {
+      // reinitialiser les variable
       clear();
+      // fermer le modal
       setLoading_(false);
-      history.push(location.pathname + "?step=2&course=" + course.id_);
+
+      if (course_ !== null && courseLink) {
+        history.push(location.pathname + "?step=1&course=" + course_.id_);
+      } else {
+        history.push(location.pathname + "?step=2&course=" + course.id_);
+      }
     }
 
     if (errors) {
       setLoading_(false);
     }
-  }, [validate]);
+  });
 
   var initialValues = {};
 
@@ -73,7 +88,9 @@ const BasicInformation = ({
       note: course_.note_passage,
       date_debut: course_.date_debut_cours,
       date_fin: course_.date_fin_cours,
-      prix: course_.prix
+      prix: course_.prix,
+      update: true,
+      idCourse: course_.id
     };
   } else {
     initialValues = {
@@ -86,7 +103,9 @@ const BasicInformation = ({
       note: "",
       date_debut: "",
       date_fin: "",
-      prix: ""
+      prix: "",
+      update: false,
+      idCourse: null
     };
   }
 
@@ -173,16 +192,24 @@ const BasicInformation = ({
                       <div className='col-md-12'>
                         <div className='form-group'>
                           <label className=' font-weight-bolder'>Langue</label>
+
                           <Field
-                            type='text'
+                            as='select'
                             name='langue'
                             className={`form-control  ${
                               errors.langue && touched.langue
                                 ? "is-invalid"
                                 : null
                             }`}
-                            placeholder='Francais, Creole'
-                          />
+                          >
+                            <option value=''>Choisir une langue</option>
+                            <option value='Créole'>Créole</option>
+                            {langues_.map(langue => (
+                              <option key={langue} value={langue}>
+                                {langue}
+                              </option>
+                            ))}
+                          </Field>
                           {errors.langue && touched.langue ? (
                             <span className='text-danger form-text '>
                               {errors.langue}
@@ -233,6 +260,8 @@ const BasicInformation = ({
                             }`}
                             placeholder='Note de passage'
                           />
+
+                          <Field type='hidden' name='update' />
 
                           {errors.note && touched.note ? (
                             <span className='text-danger form-text '>
@@ -376,16 +405,22 @@ const BasicInformation = ({
                         <button
                           type='submit'
                           disabled={(loading_, !isValid)}
-                          className={`btn btn-primary  btn-md  ${
+                          className={`btn btn-primary  btn-md font-weight-bolder  ${
                             loading_
                               ? "spinner spinner-darker-primary  spinner-left"
                               : ""
                           }`}
                         >
-                          <b>
-                            {course_ && courseLink ? "Modifier " : "Continuer "}
-                            <i className='fa fa-arrow-right'></i>
-                          </b>
+                          {!loading_ ? (
+                            <bspan>
+                              {course_ && courseLink
+                                ? "Modifier "
+                                : "Continuer "}
+                              <i className='fa fa-arrow-right'></i>
+                            </bspan>
+                          ) : (
+                            "Chergement..."
+                          )}
                         </button>
                       </div>
                     </Form>

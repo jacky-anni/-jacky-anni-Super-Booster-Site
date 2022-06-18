@@ -85,6 +85,8 @@ export const getUser = async => async dispatch => {
     setAuthToken(localStorage.token);
   }
 
+  //ff
+
   try {
     const res = await axios.get("/api/admin/user");
     const res_photo = await fetch(`/images/users/${res.data.photo}`);

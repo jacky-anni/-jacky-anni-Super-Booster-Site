@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-const MenuLeftBar = () => {
+const MenuLeftBar = ({ course_ }) => {
   return (
     <>
       <div className='col-md-12'>
@@ -10,7 +10,7 @@ const MenuLeftBar = () => {
             <div class='example-preview'>
               <ul class='navi'>
                 <li class='navi-item font-weight-bolder'>
-                  <Link to='/' class='navi-link'>
+                  <Link to={`/modules/${course_.id_}`} class='navi-link'>
                     <span class='navi-icon'>
                       <i class='flaticon-user font-weight-bolder'></i>
                     </span>
@@ -69,7 +69,7 @@ const MenuLeftBar = () => {
                 </li>
 
                 <li class='navi-item font-weight-bolder'>
-                  <Link to='/' class='navi-link'>
+                  <Link to={`/quizzes/${course_.id_}`} class='navi-link'>
                     <span class='navi-icon'>
                       <i class='flaticon-comment font-weight-bolder'></i>
                     </span>

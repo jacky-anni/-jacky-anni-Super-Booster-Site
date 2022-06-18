@@ -62,7 +62,19 @@ export const GET_COURSE_ERROR = "GET_COURSE_ERROR";
 export const ACTIVE_COURSE = "ACTIVE_COURSE";
 export const DISABLE_COURSE = "DISABLE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
+export const CHANGE_PHOTO_COURSE = "CHANGE_PHOTO_COURSE";
 
 //==========================================================================================
+
+//==========================================================================================
+// MODULES
+export const MODULES = "MODULES";
+export const SHOW_MODULE = "SHOW_MODULE";
+export const SHOW_MODULE_ERROR = "SHOW_MODULE_ERROR";
+export const CREATE_MODULES = "CREATE_MODULES";
+export const CREATE_MODULES_ERROR = "CREATE_MODULES_ERROR";
+export const EDIT_MODULES = "EDIT_MODULES";
+export const EDIT_MODULES_ERROR = "EDIT_MODULES_ERROR";
+export const DELETE_MODULES = "DELETE_MODULES";
 
 export const CLEAR = "CLEAR";

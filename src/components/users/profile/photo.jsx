@@ -20,26 +20,6 @@ const Photo = ({ profile: { loading, photo }, changePhoto, getImage }) => {
     }
   };
 
-  // const data = async file => {
-  //   changePhoto(fileList);
-  //   // console.log(file);
-  // };
-
-  // const onPreview = async file => {
-  //   let src = file.url;
-  //   if (!src) {
-  //     src = await new Promise(resolve => {
-  //       const reader = new FileReader();
-  //       reader.readAsDataURL(file.originFileObj);
-  //       reader.onload = () => resolve(reader.result);
-  //     });
-  //   }
-  //   const image = new Image();
-  //   image.src = src;
-  //   const imgWindow = window.open(src);
-  //   imgWindow.document.write(image.outerHTML);
-  // };
-
   return (
     <ImgCrop rotate>
       <Upload

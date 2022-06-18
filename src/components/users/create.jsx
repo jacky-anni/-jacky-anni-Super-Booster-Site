@@ -252,7 +252,7 @@ const CreateUser = ({
                     <div className='modal-footer'>
                       <button
                         type='submit'
-                        disabled={loading_}
+                        disabled={loading}
                         className={`btn btn-outline-primary btn-lg  ${
                           loading_
                             ? "spinner spinner-darker-primary  spinner-left"

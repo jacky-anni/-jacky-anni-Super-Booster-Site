@@ -13,6 +13,7 @@ import {
   ACTIVE_COURSE,
   DISABLE_COURSE,
   DELETE_COURSE,
+  CHANGE_PHOTO_COURSE,
   CLEAR
 } from "./../actions/types";
 import cookie from "react-cookies";
@@ -24,6 +25,7 @@ const initialState = {
   course: null,
   courses: [],
   author: null,
+  photo: null,
   descriptionValidate: false,
   filtered: null,
   errors: null
@@ -39,14 +41,15 @@ export default (state = initialState, action) => {
         courses: action.payload,
         validate: false,
         loading: false,
-        errors: null
+        errors: null,
+        photo: null
       };
 
     case GET_COURSE:
       return {
         ...state,
-        course: action.payload,
-        // author: action.payload.user,
+        course: action.payload.data,
+        photo: action.payload.photo,
         loading: false
       };
 
@@ -58,12 +61,21 @@ export default (state = initialState, action) => {
           const regex = new RegExp(`${action.payload}`, "gi");
           return (
             course.titre.match(regex) ||
-            course.description.match(regex) ||
             course.langue.match(regex) ||
             course.duree.match(regex)
           );
         })
       };
+
+    case CHANGE_PHOTO_COURSE:
+      return {
+        ...state,
+        loading: false,
+        photo: action.payload,
+        errors: null,
+        validate: false
+      };
+      break;
 
     case ADD_COURSE:
       return {
@@ -110,8 +122,7 @@ export default (state = initialState, action) => {
         courses: state.courses.filter(
           course => course.id !== action.payload.id
         ),
-        loading: false,
-        validate: true
+        loading: false
       };
 
     case CLEAR_FILTER:
@@ -157,7 +168,8 @@ export default (state = initialState, action) => {
         loading: false,
         validate: false,
         errors: null,
-        descriptionValidate: false
+        descriptionValidate: false,
+        photo: null
         // course: null
       };
 

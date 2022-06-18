@@ -4,7 +4,7 @@ import ShowDetails from "./showDetails";
 import ShowDescription from "./showDescription";
 import { Link } from "react-router-dom";
 
-const showAllDescription = ({ course_, profile_ }) => {
+const showAllDescription = ({ course_ }) => {
   return (
     <>
       <div className='accordion  accordion-toggle-arrow' id='accordionExample4'>
@@ -24,7 +24,7 @@ const showAllDescription = ({ course_, profile_ }) => {
             data-parent='#accordionExample4'
           >
             <div className='card-boddy'>
-              <ShowBasicInformation course_={course_} profile_={profile_} />
+              <ShowBasicInformation course_={course_} />
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ const showAllDescription = ({ course_, profile_ }) => {
       </div>
       <div className='modal-footer'>
         <Link
-          to={`/dashboard/course/create/${profile_.username}?step=2&course=${course_.id_}`}
+          to={`/dashboard/course/create/${course_.Utilisateur.username}?step=2&course=${course_.id_}`}
         >
           <button type='submit' className={`btn btn-primary btn-square btn-sm`}>
             <b>

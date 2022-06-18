@@ -13,6 +13,7 @@ import {
   ACTIVE_COURSE,
   DISABLE_COURSE,
   DELETE_COURSE,
+  CHANGE_PHOTO_COURSE,
   CLEAR
 } from "./types";
 import axios from "axios";
@@ -44,13 +45,17 @@ export const getCourse = course => async dispatch => {
       headers
     );
 
+    const res_photo = await fetch(`/images/courses/${res.data.photo}`);
+    const res_ = {
+      data: res.data,
+      photo: res_photo.url
+    };
+
     dispatch({
       type: GET_COURSE,
-      payload: res.data
+      payload: res_
     });
   } catch (error) {
-    console.log(error.response.data);
-
     const err = errors(error);
     dispatch({
       type: GET_COURSE_ERROR,
@@ -67,13 +72,9 @@ export const createCourse = (course, id) => async dispatch => {
       headers
     );
 
-    const data = {
-      formation: res.data
-    };
-
     dispatch({
       type: ADD_COURSE,
-      payload: data
+      payload: res.data
     });
 
     ToastMessage("Cours ajoute avec succes", "success");
@@ -83,6 +84,7 @@ export const createCourse = (course, id) => async dispatch => {
       type: ADD_COURSE_ERROR,
       payload: err
     });
+    ToastMessage(err, "error");
   }
 };
 
@@ -94,23 +96,40 @@ export const addDescription = (course, id) => async dispatch => {
       headers
     );
 
-    const data = {
-      formation: res.data
-    };
     dispatch({
       type: ADD_DESCRIPTION,
-      payload: data
+      payload: res.data
     });
 
     ToastMessage("Description ajouté  avec succes", "success");
   } catch (error) {
     const err = errors(error);
-
     ToastMessage(err, "error");
     // dispatch({
     //   type: ADD_DESCRIPTION_ERROR,
     //   payload: err
     // });
+  }
+};
+
+export const changePhoto = (photo, status, course) => async dispatch => {
+  try {
+    const res = await axios.post(
+      `/api/admin/save-photo/formation/${status}/${course}`,
+      photo,
+      headers
+    );
+    const image = await fetch(`/images/courses/${res.data}`);
+    ToastMessage("Photo de couverture ajoute avec succes", "success");
+
+    dispatch({
+      type: CHANGE_PHOTO_COURSE,
+      payload: image.url
+    });
+  } catch (error) {
+    console.log(error);
+    const err = errors(error);
+    ToastMessage(err, "error");
   }
 };
 
@@ -120,9 +139,7 @@ export const active = course => async dispatch => {
       `/api/admin/formations/active/${course.id_}`,
       headers
     );
-    // const data = {
-    //   formation: res.data
-    // };
+
     dispatch({
       type: ACTIVE_COURSE,
       payload: res.data

@@ -117,8 +117,8 @@ const LeftMenu = () => {
                     aria-haspopup='true'
                     data-menu-toggle='hover'
                   >
-                    <a
-                      href='/dashboard/users'
+                    <Link
+                      to='/dashboard/users'
                       className='menu-link menu-toggle'
                     >
                       <i className='menu-bullet menu-bullet-line'>
@@ -126,7 +126,7 @@ const LeftMenu = () => {
                       </i>
                       <span className='menu-text'>Tous les utilisateurs</span>
                       <span className='menu-label'></span>
-                    </a>
+                    </Link>
                   </li>
 
                   <li
@@ -221,9 +221,9 @@ const LeftMenu = () => {
                   </span>
                   {/*end::Svg Icon*/}
                 </span>
-                <a href='/dashboard/categories'>
+                <Link to='/dashboard/categories'>
                   <span className='menu-text'>Catégories</span>
-                </a>
+                </Link>
               </span>
             </li>
 
@@ -265,9 +265,9 @@ const LeftMenu = () => {
                   </span>
                   {/*end::Svg Icon*/}
                 </span>
-                <a href='/dashboard/courses'>
+                <Link to='/dashboard/courses'>
                   <span className='menu-text'>Formations</span>
-                </a>
+                </Link>
               </span>
             </li>
 

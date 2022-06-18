@@ -10,6 +10,7 @@ import { getUsers } from "./../../actions/userActions";
 import PropTypes from "prop-types";
 import SearchUsers from "./searchUsers";
 import NotAccess from "./../layout/notAccess";
+import Loader from "./../layout/loader";
 
 const Users = ({
   user: { errors, users, loading, filtered },
@@ -41,24 +42,26 @@ const Users = ({
 
   return (
     <>
-      <SearchUsers />
-      {loading == true ? (
-        <span style={{ padding: 50 }}>
-          <Skeleton active avatar paragraph={{ rows: 1 }} />
-          <Skeleton active avatar paragraph={{ rows: 1 }} />
-          <Skeleton active avatar paragraph={{ rows: 1 }} />
-          <Skeleton active avatar paragraph={{ rows: 1 }} />
+      <>
+        <SearchUsers />
+        {loading ? (
+          <span style={{ padding: 50 }}>
+            <Skeleton active avatar paragraph={{ rows: 1 }} />
+            <Skeleton active avatar paragraph={{ rows: 1 }} />
+            <Skeleton active avatar paragraph={{ rows: 1 }} />
+            <Skeleton active avatar paragraph={{ rows: 1 }} />
 
-          {/* <Spin size="large" /> */}
-        </span>
-      ) : (
-        <Table
-          columns={columns}
-          loading={false}
-          dataSource={filtered !== null ? filtered : users}
-          rowKey='id'
-        />
-      )}
+            {/* <Spin size="large" /> */}
+          </span>
+        ) : (
+          <Table
+            columns={columns}
+            loading={false}
+            dataSource={filtered !== null ? filtered : users}
+            rowKey='id'
+          />
+        )}
+      </>
     </>
   );
 };

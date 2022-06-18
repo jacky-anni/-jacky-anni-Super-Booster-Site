@@ -8,6 +8,7 @@ import { categoriesList } from "./../../actions/categoryActions";
 import NotAccess from "./../layout/notAccess";
 import { Empty } from "antd";
 import LoadingCharging from "./../layout/loadingCharging";
+import Loader from "./../layout/loader";
 
 const Categories = ({
   category: { errors, loading, categories, categorie },
@@ -52,7 +53,7 @@ const Categories = ({
           )}
         </div>
       ) : (
-        <LoadingCharging />
+        <Loader />
       )}
     </>
   );

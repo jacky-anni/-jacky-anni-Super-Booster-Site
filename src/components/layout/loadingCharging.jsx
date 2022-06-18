@@ -2,13 +2,12 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const LoadingCharging = () => {
-  const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
+  const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
   return (
     <center>
       <Spin indicator={antIcon} />
       <br />
-      <br />
-      <p className='font-size-h6'>Chargement en cours...</p>
+      <p className='font-size-h6 font-weight-bold'>Chargement en cours...</p>
     </center>
   );
 };
