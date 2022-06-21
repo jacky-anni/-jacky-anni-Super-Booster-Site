@@ -25,12 +25,11 @@ export const categoriesList = () => async dispatch => {
       payload: res.data
     });
   } catch (error) {
-    console.log(error.response);
-    // const err = errors(error);
-    // dispatch({
-    //   type: CATEGORIES_ERROR,
-    //   payload: err
-    // });
+    const err = errors(error);
+    dispatch({
+      type: CATEGORIES_ERROR,
+      payload: err
+    });
   }
 };
 

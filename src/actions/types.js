@@ -76,5 +76,15 @@ export const CREATE_MODULES_ERROR = "CREATE_MODULES_ERROR";
 export const EDIT_MODULES = "EDIT_MODULES";
 export const EDIT_MODULES_ERROR = "EDIT_MODULES_ERROR";
 export const DELETE_MODULES = "DELETE_MODULES";
+//==========================================================================================
+// QUIZ
+export const QUIZZES = "QUIZZES";
+export const QUIZZES_ERROR = "QUIZZES_ERROR";
+
+export const ADD_QUIZ = "ADD_QUIZ";
+export const ADD_QUIZ_ERROR = "ADD_QUIZ_ERROR";
+export const EDIT_QUIZ = "EDIT_QUIZ";
+export const EDIT_QUIZ_ERROR = "EDIT_QUIZ_ERROR";
+export const DELETE_QUIZ = "DELETE_QUIZ";
 
 export const CLEAR = "CLEAR";

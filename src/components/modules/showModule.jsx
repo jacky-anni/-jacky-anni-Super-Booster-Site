@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getCourse } from "./../../actions/coursesActions";
 import { getModule } from "./../../actions/modulesActions";
 import { PropTypes } from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import NotAccess from "./../layout/notAccess";
 import LoadingCharging from "./../layout/loadingCharging";
