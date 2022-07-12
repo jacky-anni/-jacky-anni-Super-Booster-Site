@@ -1,13 +1,8 @@
 import { Fragment, useState, useEffect, useLayoutEffect, useRef } from "react";
-import HeaderMobile from "./../partials/headerMobile";
-import Logo from "./../partials/logo";
-import LeftMenu from "./../partials/leftMenu";
-import HeaderMenu from "./../partials/headerMenu";
-import UserProfileBar from "./../partials/userProfile";
-import Notifications from "./../partials/notification";
-import Footer from "./../partials/footer";
-import ToolBar from "./../partials/toolsBar";
 import { useMediaQuery } from "react-responsive";
+import Header from "./../partials/header";
+import Slide from "./../partials/slide";
+import BannerHome from "./../partials/bannerHome";
 
 const Layout = ({ children }) => {
   const [loading_, setLoading_] = useState(true);
@@ -33,53 +28,12 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {/* {isTabletOrMobile && <HeaderMobile />} */}
-      <HeaderMobile />
-
-      <div
-        className='aside aside-left aside-fixed d-flex flex-column flex-row-auto'
-        id='kt_aside'
-      >
-        <Logo />
-        {/* {isDesktopOrLaptop && <LeftMenu />} */}
-        <LeftMenu />
-      </div>
-      <div
-        className='d-flex flex-column flex-row-fluid wrapper'
-        id='kt_wrapper'
-      >
-        <div id='kt_header' className='header header-fixed'>
-          <div className='container-fluid d-flex align-items-stretch justify-content-between'>
-            <div
-              className='header-menu-wrapper header-menu-wrapper-left'
-              id='kt_header_menu_wrapper'
-            >
-              <HeaderMenu />
-            </div>
-
-            <div className='topbar'>
-              <Notifications />
-              <UserProfileBar />
-            </div>
-          </div>
-        </div>
-
-        <div className='container'>
-          {/* <div>
-            <h1>Device Test!</h1>
-            {isDesktopOrLaptop && <p>You are a desktop or laptop</p>}
-            {isBigScreen && <p>You have a huge screen</p>}
-            {isTabletOrMobile && <p>You are a tablet or mobile phone</p>}
-            <p>
-              Your are in {isPortrait ? "portrait" : "landscape"} orientation
-            </p>
-            {isRetina && <p>You are retina</p>}
-          </div> */}
-
-          {/* {loading_ ? <Loader /> : null} */}
-          {children}
-        </div>
-        <Footer />
+      <div id='main-wrapper'>
+        <Header />
+        {/* <Slide />
+        <BannerHome /> */}
+        <div class='clearfix'></div>
+        {children}
       </div>
     </>
   );

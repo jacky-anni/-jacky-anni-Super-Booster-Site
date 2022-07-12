@@ -80,11 +80,23 @@ export const DELETE_MODULES = "DELETE_MODULES";
 // QUIZ
 export const QUIZZES = "QUIZZES";
 export const QUIZZES_ERROR = "QUIZZES_ERROR";
-
 export const ADD_QUIZ = "ADD_QUIZ";
 export const ADD_QUIZ_ERROR = "ADD_QUIZ_ERROR";
 export const EDIT_QUIZ = "EDIT_QUIZ";
 export const EDIT_QUIZ_ERROR = "EDIT_QUIZ_ERROR";
 export const DELETE_QUIZ = "DELETE_QUIZ";
+export const GET_QUIZ = "GET_QUIZ";
+
+//==========================================================================================
+// QUIESTION
+export const QUESTIONS = "QUESTIONS";
+export const QUESTIONS_ERROR = "QUESTIONS_ERROR";
+export const ADD_QUESTION = "ADD_QUESTION";
+export const ADD_QUESTION_ERROR = "ADD_QUESTION_ERROR";
+export const EDIT_QUESTIONS = "EDIT_QUESTIONS";
+export const EDIT_QUESTIONS_ERROR = "EDIT_QUESTIONS_ERROR";
+export const GET_QUESTION = "GET_QUESTION";
+export const GET_QUESTION_ERROR = "GET_QUESTION_ERROR";
+export const DELETE_QUESTION = "DELETE_QUESTION";
 
 export const CLEAR = "CLEAR";
