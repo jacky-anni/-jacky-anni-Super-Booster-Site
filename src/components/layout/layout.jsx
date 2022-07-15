@@ -29,7 +29,6 @@ const Layout = ({ children }) => {
   return (
     <>
       <div id='main-wrapper'>
-        <Header />
         {/* <Slide />
         <BannerHome /> */}
         <div class='clearfix'></div>

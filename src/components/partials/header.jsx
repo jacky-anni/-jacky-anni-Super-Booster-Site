@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Cart from "./../cart/carts";
+
 const Header = () => {
   return (
     <>
@@ -6,11 +8,14 @@ const Header = () => {
         <div className='container'>
           <nav id='navigation' className='navigation navigation-landscape'>
             <div className='nav-header'>
-              <Link className='nav-brand' to='/'>
+              <Link className='nav-brand ml-5' to='/'>
                 {/* <img src='assets/img/logo.png' className='logo' alt='' /> */}
                 <b>Super Booster</b>
               </Link>
-              <div className='nav-toggle' />
+              <div
+                className='nav-toggle'
+                style={{ position: "absolute", left: "0px" }}
+              />
             </div>
             <div
               className='nav-menus-wrapper'
@@ -41,34 +46,13 @@ const Header = () => {
                       </ul>
                     </li>
                     <li>
-                      <a href='index.html'>Home 1</a>
+                      <Link to='/'>Home 1</Link>
                     </li>
                     <li>
                       <a href='home-2.html'>Home 2</a>
                     </li>
                     <li>
                       <a href='home-3.html'>Home 3</a>
-                    </li>
-                    <li>
-                      <a href='home-4.html'>Home 4</a>
-                    </li>
-                    <li>
-                      <a href='home-5.html'>Home 5</a>
-                    </li>
-                    <li>
-                      <a href='home-6.html'>Home 6</a>
-                    </li>
-                    <li>
-                      <a href='home-7.html'>Home 7</a>
-                    </li>
-                    <li>
-                      <a href='home-8.html'>Home 8</a>
-                    </li>
-                    <li>
-                      <a href='home-9.html'>Home 9</a>
-                    </li>
-                    <li>
-                      <a href='home-10.html'>Home 10</a>
                     </li>
                   </ul>
                 </li>
@@ -109,15 +93,6 @@ const Header = () => {
                         <li>
                           <a href='full-width-course.html'>Courses grid 1</a>
                         </li>
-                        <li>
-                          <a href='full-width-course-2.html'>Courses grid 1</a>
-                        </li>
-                        <li>
-                          <a href='full-width-course-3.html'>Courses grid 1</a>
-                        </li>
-                        <li>
-                          <a href='full-width-course-4.html'>Courses grid 1</a>
-                        </li>
                       </ul>
                     </li>
                     <li>
@@ -128,21 +103,6 @@ const Header = () => {
                       <ul className='nav-dropdown nav-submenu'>
                         <li>
                           <a href='detail.html'>Course Detail 1</a>
-                        </li>
-                        <li>
-                          <a href='detail-2.html'>Course Detail 2</a>
-                        </li>
-                        <li>
-                          <a href='detail-3.html'>Course Detail 3</a>
-                        </li>
-                        <li>
-                          <a href='detail-4.html'>Course Detail 4</a>
-                        </li>
-                        <li>
-                          <a href='detail-5.html'>Course Detail 5</a>
-                        </li>
-                        <li>
-                          <a href='detail-6.html'>Course Detail 6</a>
                         </li>
                       </ul>
                     </li>
@@ -169,24 +129,6 @@ const Header = () => {
                         <li>
                           <a href='dashboard.html'>User Dashboard</a>
                         </li>
-                        <li>
-                          <a href='my-profile.html'>My Profile</a>
-                        </li>
-                        <li>
-                          <a href='all-courses.html'>My Courses</a>
-                        </li>
-                        <li>
-                          <a href='my-order.html'>My Order</a>
-                        </li>
-                        <li>
-                          <a href='saved-courses.html'>Saved Courses</a>
-                        </li>
-                        <li>
-                          <a href='reviews.html'>My Reviews</a>
-                        </li>
-                        <li>
-                          <a href='settings.html'>My Settings</a>
-                        </li>
                       </ul>
                     </li>
                     <li>
@@ -198,57 +140,10 @@ const Header = () => {
                         <li>
                           <a href='shop-full-width.html'>Shop Full Width</a>
                         </li>
-                        <li>
-                          <a href='shop-left-sidebar.html'>Shop Sidebar Left</a>
-                        </li>
-                        <li>
-                          <a href='shop-right-sidebar.html'>
-                            Shop Sidebar Right
-                          </a>
-                        </li>
-                        <li>
-                          <a href='product-detail.html'>Shop Detail</a>
-                        </li>
-                        <li>
-                          <a href='add-to-cart.html'>Add To Cart</a>
-                        </li>
-                        <li>
-                          <a href='product-wishlist.html'>Wishlist</a>
-                        </li>
-                        <li>
-                          <a href='checkout.html'>Checkout</a>
-                        </li>
-                        <li>
-                          <a href='shop-order.html'>Order</a>
-                        </li>
                       </ul>
                     </li>
                     <li>
                       <a href='about-us.html'>About Us</a>
-                    </li>
-                    <li>
-                      <a href='blog.html'>Blog Style</a>
-                    </li>
-                    <li>
-                      <a href='blog-detail.html'>Blog Detail</a>
-                    </li>
-                    <li>
-                      <a href='pricing.html'>Pricing</a>
-                    </li>
-                    <li>
-                      <a href='404.html'>404 Page</a>
-                    </li>
-                    <li>
-                      <a href='register.html'>Register</a>
-                    </li>
-                    <li>
-                      <a href='component.html'>Elements</a>
-                    </li>
-                    <li>
-                      <a href='privacy.html'>Privacy Policy</a>
-                    </li>
-                    <li>
-                      <a href='faq.html'>FAQs</a>
                     </li>
                   </ul>
                 </li>
@@ -257,19 +152,22 @@ const Header = () => {
                 </li>
               </ul>
               <ul className='nav-menu nav-menu-social align-to-right'>
-                <li className='login_click light'>
+                <li className='login_cldick light'>
                   <a href='#' data-toggle='modal' data-target='#login'>
-                    Sign in
+                    Connexion
                   </a>
                 </li>
-                <li className='login_click theme-bg'>
-                  <a href='#' data-toggle='modal' data-target='#signup'>
-                    Sign up
+
+                <li className='login_click light'>
+                  <a href='#' data-toggle='modal' data-target='#login'>
+                    Inscrivez-vous
                   </a>
                 </li>
               </ul>
             </div>
           </nav>
+
+          <Cart />
         </div>
       </div>
     </>

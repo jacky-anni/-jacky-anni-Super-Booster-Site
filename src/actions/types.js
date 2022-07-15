@@ -99,4 +99,11 @@ export const GET_QUESTION = "GET_QUESTION";
 export const GET_QUESTION_ERROR = "GET_QUESTION_ERROR";
 export const DELETE_QUESTION = "DELETE_QUESTION";
 
+// CART
+export const CART_ITEMS = "CART_ITEMS";
+export const ADD_ITEM = "ADD_ITEM";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export const CLEAR_ITEM = "CLEAR_ITEM";
+export const GET_CART = "GET_CART";
 export const CLEAR = "CLEAR";
+export const CLEAR_CART = "CLEAR_CART";

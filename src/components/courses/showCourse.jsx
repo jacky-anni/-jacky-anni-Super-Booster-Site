@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import Loader from "./../layout/loader";
 import LoadingCharging from "./../layout/loadingCharging";
+import { Skeleton } from "antd";
+import Banner from "./../layout/banner";
+import NotAccess from "./../layout/notAccess";
 
 const ShowCourse = ({
   course: { courses, loadingCourse, course, errorsCourse },
@@ -15,6 +18,7 @@ const ShowCourse = ({
 }) => {
   const { courseLink } = useParams();
   useEffect(() => {
+    clear();
     getCourse(courseLink);
   }, []);
 
@@ -22,17 +26,23 @@ const ShowCourse = ({
     <>
       {!loadingCourse ? (
         <>
-          {!errorsCourse ? (
+          {course && !errorsCourse ? (
             <>
               <BannerCourse course={course} />
               <CourseDetail course={course} />
             </>
           ) : (
-            <h2>Erreur</h2>
+            <NotAccess error={"Cette formation n'existe pas"} />
           )}
         </>
       ) : (
-        <Loader />
+        <>
+          <BannerCourse course={course} loading={true} /> <br />
+          <LoadingCharging
+            type={"spinningBubbles"}
+            text={"Cours en train de charger..."}
+          />
+        </>
       )}
     </>
   );

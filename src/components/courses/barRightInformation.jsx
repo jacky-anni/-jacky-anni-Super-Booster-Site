@@ -1,8 +1,10 @@
 import BasicInformation from "./basicInformation";
+import ButtomCoursePayment from "./buttomCoursePayment";
+
 const BarRightInformation = ({ course }) => {
   return (
     <>
-      <div className='col-lg-4 col-md-4 pt-3'>
+      <div className='col-lg-4 pt-3'>
         <div className='ed_view_box style_2 overlio'>
           <div className='property_video sm'>
             <div className='thumb'>
@@ -33,19 +35,30 @@ const BarRightInformation = ({ course }) => {
             <div className='ed_author_thumb'>
               <img
                 className='img-fluid'
-                src='assets/img/user-5.jpg'
+                src='../assets/img/user-5.jpg'
                 alt='7.jpg'
               />
             </div>
             <div className='ed_author_box'>
-              <h4>Michael Russell</h4>
+              <h4>
+                {course.Utilisateur.prenom} &nbsp;
+                {course.Utilisateur.nom}
+              </h4>
               <span>Web Designer in Canada</span>
             </div>
           </div>
-          <div className='ed_view_price pl-4'>
-            <span>Acctual Price</span>
-            <h2 className='theme-cl'>$ 149.00</h2>
-          </div>
+
+          {course.type == "Payante" ? (
+            <div className='ed_view_price pl-4'>
+              <span>Prix actuel</span>
+              <h3 className='theme-cl font-bold'>{course.prix} HTG</h3>
+            </div>
+          ) : (
+            <div className='ed_view_price pl-4'>
+              <span>Prix actuel</span>
+              <h5 className='theme-cl font-bold'>Gratuite</h5>
+            </div>
+          )}
           <div className='ed_view_features pl-4'>
             <span>Course Features</span>
             <ul>
@@ -71,12 +84,7 @@ const BarRightInformation = ({ course }) => {
               </li>
             </ul>
           </div>
-          <div className='ed_view_link'>
-            <a href='#' className='btn btn-theme enroll-btn'>
-              Enroll Now
-              <i className='ti-angle-right' />
-            </a>
-          </div>
+          <ButtomCoursePayment course={course} />
         </div>
         <BasicInformation course={course} />
       </div>

@@ -7,6 +7,8 @@ import setAuthToken from "./components/ultils/setAuthToken";
 import { LoginLayoutRoute } from "./routing/route";
 import { AppLayoutRoute } from "./routing/route";
 import ShowCourse from "./components/courses/showCourse";
+import Header from "./components/partials/header";
+import Checkout from "./components/cart/checkout";
 
 const App = () => {
   if (localStorage.token) {
@@ -17,12 +19,15 @@ const App = () => {
     <Provider store={store}>
       <>
         {/* page d'accuel */}
+        <Header />
         <AppLayoutRoute exact path='/' component={Home} />
         <AppLayoutRoute
           exact
           path='/course/:courseLink'
           component={ShowCourse}
         />
+
+        <AppLayoutRoute exact path='/checkout' component={Checkout} />
       </>
     </Provider>
   );

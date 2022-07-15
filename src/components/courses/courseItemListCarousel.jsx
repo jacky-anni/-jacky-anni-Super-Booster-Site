@@ -13,80 +13,72 @@ const CourseItemListCarousel = ({ course }) => {
       setImg(data.url);
     }
   });
-  const data = "fkfkfk";
 
   return (
     <>
       {course ? (
-        <Tooltip placement='right' title={data} color={"white"} zIndex={true}>
-          <div className='col-lg-4 col-md-6'>
-            <div className='education_block_grid style_2'>
-              <div className='education_block_thumb n-shadow'>
-                <a href='course-detail.html'>
-                  {/* <Avatar
-                  shape='square'
+        <div className='col-lg-4 col-md-6'>
+          <div className='education_block_grid style_2'>
+            <div className='education_block_thumb n-shadow'>
+              <a href=''>
+                <img
                   src={img}
-                  size={"100%"}
-                  icon={<PictureOutlined />}
-                /> */}
-                  <img
-                    src={img}
-                    className='img-fluid'
-                    style={{ height: "200px", width: "200%" }}
-                    alt=''
-                  />
-                </a>
-                <div className='cources_price'>$429</div>
-              </div>
-              <div className='education_block_body'>
-                <h4 className='bl-title'>
-                  <Link
-                    to={`/course/${course.slug}`}
-                    style={{ color: "black" }}
-                  >
-                    {course.titre}
-                  </Link>
-                </h4>
-              </div>
-              <div className='cources_info_style3'>
-                <ul>
-                  <li>
-                    <i className='ti-eye mr-2' />
-                    9857 Views
-                  </li>
-                  <li>
-                    <i className='ti-time mr-2' />
-                    7h 45min
-                  </li>
-                  <li>
-                    <i className='ti-star text-warning mr-2' />
-                    4.9 Reviews
-                  </li>
-                </ul>
-              </div>
-              <div className='education_block_footer'>
-                <div className='education_block_author'>
-                  <div className='path-img'>
-                    <a href='instructor-detail.html'>
-                      <img
-                        src='assets/img/user-5.jpg'
-                        className='img-fluid'
-                        alt=''
-                      />
-                    </a>
-                  </div>
-                  <h5>
-                    <a href='instructor-detail.html'>Shaurya Preet</a>
-                  </h5>
+                  className='img-fluid'
+                  style={{ height: "200px", width: "200%" }}
+                  alt=''
+                />
+              </a>
+            </div>
+            <div className='education_block_body'>
+              <h4 className='bl-title'>
+                <Link to={`/course/${course.slug}`} style={{ color: "black" }}>
+                  {course.titre}
+                </Link>
+              </h4>
+            </div>
+            <div className='cources_info_style3'>
+              <ul>
+                <li>
+                  <i className='ti-eye mr-2' />
+                  9857 Views
+                </li>
+                <li>
+                  <i className='ti-time mr-2' />
+                  7h 45min
+                </li>
+                <li>
+                  <i className='ti-star text-warning mr-2' />
+                  4.9 Reviews
+                </li>
+              </ul>
+            </div>
+            <div className='education_block_footer'>
+              <div className='education_block_author'>
+                <div className='path-img'>
+                  <a href='instructor-detail.html'>
+                    <img
+                      src='assets/img/user-5.jpg'
+                      className='img-fluid'
+                      alt=''
+                    />
+                  </a>
                 </div>
-                <div className='foot_lecture'>
-                  <i className='ti-control-skip-forward mr-2' />
-                  32 lectures
-                </div>
+                <h5>
+                  <a href='instructor-detail.html'>Shaurya Preet</a>
+                </h5>
+              </div>
+              <div className='foot_lectudre'>
+                {course.type == "Payante" ? (
+                  <h6 className='theme-cl font-bold size-xs'>
+                    {course.prix} HTG
+                  </h6>
+                ) : (
+                  <h6 className='theme-cl font-bold size-xs'>Gratuite</h6>
+                )}
               </div>
             </div>
           </div>
-        </Tooltip>
+        </div>
       ) : (
         <LoadingCharging />
       )}

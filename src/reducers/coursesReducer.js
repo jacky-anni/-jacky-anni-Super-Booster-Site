@@ -41,13 +41,13 @@ export default (state = initialState, action) => {
         errorsCourse: null
       };
 
-    // case CLEAR:
-    //   return {
-    //     ...state,
-    //     course: null,
-    //     loadingCourse: true,
-    //     errorsCourse: null
-    //   };
+    case CLEAR:
+      return {
+        ...state,
+        course: null,
+        loadingCourse: true,
+        errorsCourse: null
+      };
 
     //===================================================================
 

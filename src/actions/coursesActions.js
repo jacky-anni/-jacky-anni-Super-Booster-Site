@@ -32,6 +32,7 @@ export const getCourse = course => async dispatch => {
     });
   } catch (error) {
     const err = errors(error);
+    console.log(err);
 
     dispatch({
       type: GET_COURSE_ERROR,
@@ -43,11 +44,5 @@ export const getCourse = course => async dispatch => {
 export const clear = () => {
   return {
     type: CLEAR
-  };
-};
-
-export const setLoading = () => {
-  return {
-    type: SET_LOADING
   };
 };
